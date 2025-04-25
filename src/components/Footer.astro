@@ -1,0 +1,33 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+    <p>
+        &copy; {currentYear} HAIPS Workshop Organizers. 
+        Website built with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a>.
+    </p>
+</footer>
+
+<style>
+    footer {
+        margin-top: 3rem;
+        padding: 2rem 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        border-top: 1px solid var(--border-color);
+        background-color: var(--bg-primary);
+    }
+    footer p {
+        margin: 0;
+    }
+    footer a {
+        color: var(--text-secondary);
+        text-decoration: underline;
+    }
+    footer a:hover {
+        color: var(--accent);
+    }
+</style> 

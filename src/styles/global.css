@@ -1,0 +1,11 @@
+/* src/styles/global.css */
+/* Most global styles are defined within Layout.astro's <style is:global> tag */
+/* You can add additional global styles here if needed. */
+
+/* Example: Add a style for a specific class used across pages */
+.section-title {
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+} 

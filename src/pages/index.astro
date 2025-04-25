@@ -1,0 +1,276 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import { organizers } from '../data/organizers.js'; // Import organizer data
+---
+
+<Layout title="Home">
+    
+    <img src="/haips-banner.png" alt="HAIPS Workshop Banner" class="hero-image">
+
+    <p>
+    <strong>
+    We are excited to announce the 1st workshop on Human-Centered AI Privacy and Security (HAIPS, pronounced "hypes"), co-located with <a href="https://www.sigsac.org/ccs/CCS2025/">ACM CCS 2025</a>!
+    </strong>
+    </p>
+
+    <section id="cfp">
+        <h2>Call for Papers</h2>
+        <p>
+            Recent advances in artificial intelligence (AI) and machine learning (ML) create and exacerbate new security, privacy, and safety risks, from inferring personal attributes, generating non-consensual intimate imagery, to voice cloning, to spear phishing. At the same time, AI can afford new opportunities to address long standing end-user security and privacy challenges. We welcome participants who work on topics related to AI/ML security and privacy from human-centered perspectives. Interested participants will be asked to contribute a paper to the workshop. 
+        </p>
+
+        <h3>Topics of Interest</h3>
+        <p>Topics of interest include, but are not limited to:</p>
+        <ul>
+            <li>Human-centered evaluation of privacy, security, and safety vulnerabilities in emerging AI technologies</li>
+            <li>Users' mental models, behaviors, and preferences about privacy, security, and safety in AI systems</li>
+            <li>Usable security mechanisms and privacy-enhancing technologies in AI systems</li>
+            <li>Novel applications of AI for human-centered privacy, security, and safety management, education, and design</li>
+            <li>Security, privacy, safety, and human autonomy in agentic AI systems</li>
+            <li>Security, privacy, and safety risks and mitigation related to AI practitioners</li>
+            <li>Human-centered evaluation and analysis of laws and policies in reaction to emerging privacy, security, and safety threats caused by AI</li>
+            <li>Societal impact of AI on privacy, security, safety and its tensions with other requirements (e.g., fairness)</li>
+            <li>Position papers outlining a novel research agenda for human-centered privacy, security, and safety in the context of AI</li>
+        </ul>
+
+        <h3>Submission Format</h3>
+        <p>
+            At most 10 pages in the ACM double-column format (sigconf in the ACM template<a href="https://www.acm.org/publications/proceedings-template" target="_blank" rel="noopener noreferrer">*</a>), excluding references and appendices.
+        </p>
+        <p><small>
+            <strong>Note for LaTeX users:</strong> Please use <code>{'\\documentclass[sigconf,anonymous]{acmart}'}</code> for submission. For the camera ready version, please use <code>{'\\documentclass[sigconf]{acmart}'}</code>.
+        </small></p>
+
+        <h3>Submission Types</h3>
+        <ol>
+            <li>Original papers on new techniques and empirical studies;</li>
+            <li>Systematization-of-knowledge papers;</li>
+            <li>Position papers.</li>
+        </ol>
+        <p>The authors can specify the paper type in the submission form. Accepted papers will be published in the ACM Digital Library.</p>
+
+        <h3>Review Process</h3>
+        <p>Double-blind. Papers will be selected based on the quality of the submission and diversity of perspectives to allow for a meaningful exchange of knowledge between a broad range of stakeholders.</p>
+        <p>Paper awards will be established to recognize outstanding works.</>
+    </section>
+
+    <section id="organization">
+        <h2>Organizing Committee</h2>
+        <div class="committee-section">
+            <h3>Workshop Chairs</h3>
+            <ul class="organizer-list chairs-steering">
+                {organizers.chairs.map(chair => (
+                    <li>
+                        {/* Use chair.profilePic if available, otherwise show placeholder */}
+                        {chair.profilePic ? (
+                            <img src={chair.profilePic} alt={`Profile photo of ${chair.name}`} class="profile-pic" />
+                        ) : (
+                            <div class="profile-pic-placeholder"></div>
+                        )}
+                        <div class="organizer-details">
+                            {chair.website && chair.website !== '#' ? (
+                                <a href={chair.website} target="_blank" rel="noopener noreferrer">
+                                    <strong>{chair.name}</strong>
+                                </a>
+                            ) : (
+                                <strong>{chair.name}</strong>
+                            )}
+                            ({chair.affiliation})
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <div class="committee-section">
+            <h3>Steering Committee</h3>
+            <ul class="organizer-list chairs-steering">
+                {organizers.steeringCommittee.map(member => (
+                    <li>
+                        {/* Use member.profilePic if available, otherwise show placeholder */}
+                        {member.profilePic ? (
+                            <img src={member.profilePic} alt={`Profile photo of ${member.name}`} class="profile-pic" />
+                        ) : (
+                            <div class="profile-pic-placeholder"></div>
+                        )}
+                        <div class="organizer-details">
+                            {member.website && member.website !== '#' ? (
+                                <a href={member.website} target="_blank" rel="noopener noreferrer">
+                                    <strong>{member.name}</strong>
+                                </a>
+                            ) : (
+                                <strong>{member.name}</strong>
+                            )}
+                            ({member.affiliation})
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <div class="committee-section">
+            <h3>Program Committee</h3>
+            <p>Includes Workshop Chairs and:</p>
+            <ul class="organizer-list chairs-steering">
+                {organizers.programCommittee.map(member => (
+                    <li>
+                        {/* Use member.profilePic if available, otherwise show placeholder */}
+                        {member.profilePic ? (
+                            <img src={member.profilePic} alt={`Profile photo of ${member.name}`} class="profile-pic" />
+                        ) : (
+                            <div class="profile-pic-placeholder"></div>
+                        )}
+                        <div class="organizer-details">
+                            {member.website && member.website !== '#' ? (
+                                <a href={member.website} target="_blank" rel="noopener noreferrer">
+                                    <strong>{member.name}</strong>
+                                </a>
+                            ) : (
+                                <strong>{member.name}</strong>
+                            )}
+                            ({member.affiliation})
+                        </div>
+                    </li>
+                ))}
+            </ul>
+            <p><em>More PC members to be confirmed.</em></p>
+        </div>
+    </section>
+
+    <section id="submission">
+        <h2>Paper Submission</h2>
+
+        <p>
+            Submission site is open! <a href="https://haips2025.hotcrp.com">https://haips2025.hotcrp.com/</a>
+        </p>
+
+        <p>
+            Please refer to the <a href="/#cfp">Call for Papers</a> section for information on topics and formatting.
+        </p>
+
+    </section>
+
+    <section id="dates">
+        <h2>Important Dates</h2>
+        <ul class="styled-list">
+            <li><strong>Paper Submission Deadline:</strong> June 20, 2025</li>
+            <li><strong>Notification of Acceptance:</strong> August 8, 2025 </li>
+            <li><strong>Camera-Ready Deadline:</strong> August 22, 2025</li>
+            <li><strong>Workshop Date:</strong> Date TBA, co-located with CCS 2025 (Oct 13-17, 2025)</li>
+        </ul>
+    </section>
+
+
+</Layout>
+
+<style>
+    .tagline {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        margin-top: -1em;
+        margin-bottom: 2em;
+    }
+    .hero-image {
+        width: 100%;
+        /* max-height: 300px; */ /* Allow full height */
+        object-fit: cover; 
+        margin-bottom: 1rem; /* Reduced value */
+        border-radius: 8px;
+        background-color: var(--bg-secondary); /* Placeholder color */
+    }
+    section {
+        margin-bottom: 3rem;
+        padding-top: 1rem; /* Add padding to space below fixed header */
+    }
+    section h2 {
+        margin-top: 0;
+        border-bottom: 2px solid var(--accent-light);
+        padding-bottom: 0.4rem;
+        display: inline-block;
+    }
+    section h3 {
+        margin-top: 2.5rem;
+    }
+    .styled-list {
+        list-style: none;
+        padding-left: 0;
+    }
+    .styled-list li {
+        margin-bottom: 0.5rem;
+        padding-left: 1.2em;
+        position: relative;
+    }
+    .styled-list li::before {
+        content: '\25AA'; /* Square bullet */
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+        top: 1px;
+        font-size: 0.8em;
+    }
+
+    /* Styles from organization.astro */
+    .committee-section {
+        margin-bottom: 2rem;
+    }
+    .organizer-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 1rem; 
+    }
+
+    .organizer-list.chairs-steering li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .profile-pic-placeholder,
+    .profile-pic {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    .profile-pic-placeholder {
+        background-color: var(--accent-light); /* Placeholder color */
+    }
+
+    .profile-pic {
+        object-fit: cover; /* Ensure image covers the circle nicely */
+    }
+
+    .organizer-details {
+        flex-grow: 1;
+    }
+
+    .organizer-list strong {
+        margin-bottom: 0;
+        font-size: 1em;
+        color: var(--text-primary);
+    }
+
+    .organizer-list a {
+        font-size: 0.9em;
+    }
+
+    /* Adjustments for single page */
+    h2 {
+        margin-top: 2rem;
+    }
+    /* Specific style overrides if needed */
+    #cfp ol,
+    #cfp ul {
+        margin-left: 1.5em;
+    }
+    #cfp ul {
+        list-style: disc;
+    }
+    #cfp ol {
+        list-style: decimal;
+    }
+
+</style>

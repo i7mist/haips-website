@@ -1,0 +1,152 @@
+---
+// src/components/Header.astro
+const navLinks = [
+    { href: '/#', text: 'Home' },
+    { href: '/#cfp', text: 'Call for Papers' },
+    { href: '/#organization', text: 'Organization' },
+    { href: '/#submission', text: 'Submission' },
+    { href: '/#dates', text: 'Important Dates' },
+];
+---
+
+<header>
+    <div class="container">
+        <div class="logo">
+            <a href="/#">
+                <h1>HAIPS@CCS 2025</h1>
+                <p class="subtitle">1st Workshop on Human-Centered AI Privacy and Security</p>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                {navLinks.map(link => (
+                    <li><a href={link.href}>{link.text}</a></li>
+                ))}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<script>
+    const header = document.querySelector('header');
+
+    const handleScroll = () => {
+        if (window.scrollY > 10) { // Use a small threshold like 10px
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+
+    // Run on initial load
+    handleScroll(); 
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Optional: Clean up listener on component unmount (Astro handles this implicitly in most cases, but good practice)
+    // window.addEventListener('astro:page-load', () => { // Example cleanup if needed for SPA transitions 
+    //     window.removeEventListener('scroll', handleScroll);
+    // });
+
+</script>
+
+<style>
+    header {
+        position: fixed; /* Keep header at the top */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000; /* Ensure header stays above other content */
+        background-color: var(--bg-primary); /* Use primary background for fixed header */
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: box-shadow 0.3s ease; /* Add transition for smooth shadow appearance */
+    }
+
+    header.scrolled {
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Apply shadow only when scrolled */
+    }
+
+    .container {
+        max-width: 1000px; /* Wider container for header */
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    }
+    .logo a {
+        text-decoration: none;
+        color: inherit; /* Inherit color from parent */
+    }
+     .logo h1 {
+        margin: 0;
+        font-size: 1.8rem; /* Adjust size */
+        color: var(--accent-dark);
+        border-bottom: none; /* Remove border from layout */
+        padding-bottom: 0;
+    }
+    .logo .subtitle {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 1.5rem; /* Add space between links */
+        flex-wrap: wrap; /* Allow nav links to wrap */
+    }
+    nav li {
+        margin: 0;
+    }
+    nav a {
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 500;
+        padding: 0.5rem 0; /* Add some vertical padding */
+        position: relative;
+        transition: color 0.2s ease;
+    }
+    nav a:hover,
+    nav a.active { /* Style for active link if needed */
+        color: var(--accent);
+    }
+
+    /* Simple underline effect on hover */
+    nav a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--accent);
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+
+    nav a:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 700px) {
+        .container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .logo {
+            margin-bottom: 1rem;
+        }
+        nav ul {
+            gap: 1rem; /* Smaller gap on mobile */
+        }
+    }
+</style> 
