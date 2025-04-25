@@ -30,14 +30,20 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Or your preferred Node.js version
-          cache: 'pnpm' # Cache pnpm dependencies
+          node-version: 20 
+          # cache: 'pnpm' # We'll let pnpm handle its own cache via setup action
       - name: Setup PNPM
         uses: pnpm/action-setup@v4
         with:
-          version: 8 # Or your preferred pnpm version
+          version: 8 
+          run_install: false # Don't run install automatically here
+          
+      # Add this step to explicitly install pnpm globally
+      - name: Install pnpm globally (workaround) 
+        run: npm install -g pnpm@8
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install # Now this should find pnpm
       - name: Build
         # Make sure your astro.config.mjs has the correct 'site' property configured!
         run: pnpm build 
@@ -48,11 +54,6 @@ jobs:
         with:
           # Upload contents of the 'dist' directory
           path: './dist'
-      - name: Deploy check # Optional: Add a check link in the PR/Commit status
-        uses: actions/deploy-pages@v4
-        with:
-          preview: true
-
 
   # Deployment job
   deploy:
