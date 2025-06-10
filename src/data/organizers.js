@@ -16,7 +16,7 @@ export const organizers = {
         },
         {
             name: 'Yaxing Yao',
-            affiliation: 'Johns Hopkins',
+            affiliation: 'Johns Hopkins University',
             profilePic: 'https://wordpress.cs.vt.edu/yaxingyao/wp-content/uploads/sites/221/2024/05/image-vt.jpeg',
             website: 'https://yaxingyao.cs.vt.edu',
         },
