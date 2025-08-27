@@ -1,0 +1,336 @@
+Submission #1: Privacy Fatigue and Its Effects on ChatGPT Acceptance Among Undergraduate
+Students: Is Privacy Dead?
+================================================================================================
+
+Abstract
+--------
+OpenAI’s generative pre-trained transformer (ChatGPT) is rapidly transforming fields such as education and becoming an integral part of our daily lives. However, its rise has sparked intense privacy debates, raising concerns about the storage of personal information and attracting global regulatory scrutiny. ChatGPT is gaining popularity among undergraduate students owing to its personalized learning capabilities, leading many universities to provide guidelines and seminars on its use. Curiosity about the reasons for ChatGPT’s popularity inspired our research. Through a survey of 695 undergraduate students in South Korea, we found that “privacy fatigue”—a feeling of hopelessness and weariness regarding privacy—was associated with these students’ adoption of ChatGPT. The findings revealed that this fatigue reduces perceived privacy risks, enhances their expectations of the platform, and boosts their intention to use ChatGPT. By incorporating the concepts of privacy fatigue, perceived risk, and elements from the unified theory of acceptance and use of technology, we developed a novel model to understand this phenomenon. Interestingly, despite the potential risks, the intention to use ChatGPT was not significantly influenced by perceived risk. This study contributes to a better understanding of undergraduate students’ privacy perceptions when leveraging ChatGPT in education.
+
+Authors
+-------
+1. Jiwon Chung <0000againism@korea.ac.kr> (School of Cybersecurity, Korea University)
+2. Hun-yeong Kwon <khy0@korea.ac.kr> (School of Cybersecurity, Korea University)
+
+Submission Type
+---------------
+Poster (posters on research published in 2023 or later)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+
+Submission #2: Privacy Perception and Protection in Continuous Vision-Language Models
+Interaction (Position Paper)
+================================================================================================
+
+Abstract
+--------
+Vision-language models (VLMs) are a fusion of vision and natural language models that can comprehend the visual world with reasoning capabilities. Soon, they will engage in continuous, memory-rich interaction to assist people in various daily activities. In this position paper, we advocate that privacy in VLM interactions, especially in continuous VLM interactions, should be investigated and addressed to prevent risks from their rapid development. We begin by reviewing current VLM models and applications where privacy issues exist in their interactions. We subsequently elaborate on our positions for comprehending and addressing privacy concerns in the continuous VLM interactions by enumerating scenarios of VLM interactions alongside prospective research directions. Finally, we outline related research agendas, including details on how to set contextual integrity (CI) for VLM interactions and develop interactive privacy protection methods. 
+By providing our positions and proposed solutions, we hope this position paper can inspire following studies to address these problems and establish risk-free VLM interactions in the future.
+
+Authors
+-------
+1. Anran Xu <anran@iis-lab.org> (The University of Tokyo & RIKEN)
+2. Hiromi Arai <hiromi.arai@riken.jp> (RIKEN)
+3. Koji Yatani <koji@iis-lab.org> (The University of Tokyo)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Position paper
+
+
+Submission #3: Understanding Users' Privacy Perceptions Towards LLM's RAG-based Memory
+======================================================================================
+
+Abstract
+--------
+Large Language Models (LLMs) are increasingly integrating memory functionalities to provide personalized and context-aware interactions. However, user understanding, practices and expectations regarding these memory systems are not yet well understood. This paper presents a thematic analysis of semi-structured interviews with 18 users to explore their mental models of LLM's Retrieval Augmented Generation (RAG)-based memory, current usage practices, perceived benefits and drawbacks, privacy concerns and expectations for future memory systems. Our findings reveal diverse and often incomplete mental models of how memory operates. While users appreciate the potential for enhanced personalization and efficiency, significant concerns exist regarding privacy, control and the accuracy of remembered information. Users express a desire for granular control over memory generation, management, usage and updating, including clear mechanisms for reviewing, editing, deleting and categorizing memories, as well as transparent insight into how memories and inferred information are used. We discuss design implications for creating more user-centric, transparent, and trustworthy LLM memory systems.
+
+Authors
+-------
+1. Shuning Zhang <zsn23@mails.tsinghua.edu.cn> (Tsinghua University)
+2. Rongjun Ma <rongjun.ma@aalto.fi> (Aalto University)
+3. Ying Ma <yima3@student.unimelb.edu.au> (The University of Melbourne)
+4. Shixuan Li <li-sx24@mails.tsinghua.edu.cn> (Tsinghua University)
+5. Yiqun Xu <xuyiqun22@mails.tsinghua.edu.cn> (Tsinghua University)
+6. Xin Yi <yixin@tsinghua.edu.cn> (Tsinghua University)
+7. Hewu Li <lihewu@cernet.edu.cn> (Tsinghua University)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+
+Submission #5: Through Their Eyes: User Perceptions on Sensitive Attribute Inference of Social
+Media Videos by Visual Language Models
+================================================================================================
+
+Abstract
+--------
+The rapid advancement of Visual Language Models (VLMs) has enabled sophisticated analysis of visual content, leading to concerns about the inference of sensitive user attributes and subsequent privacy risks. While technical capabilities of VLMs are increasingly studied, users' understanding, perceptions, and reactions to these inferences remain less explored, especially concerning videos uploaded on the social media. This paper addresses this gap through a semi-structured interview (N=17), investigating user perspectives on VLM-driven sensitive attribute inference from their visual data. Findings reveal that users perceive VLMs as capable of inferring a range of attributes, including location, demographics, and socioeconomic indicators, often with unsettling accuracy. Key concerns include unauthorized identification, misuse of personal information, pervasive surveillance, and harm from inaccurate inferences. Participants reported employing various mitigation strategies, though with skepticism about their ultimate effectiveness against advanced AI. Users also articulate clear expectations for platforms and regulators, emphasizing the need for enhanced transparency, user control, and proactive privacy safeguards. These insights are crucial for guiding the development of responsible AI systems, effective privacy-enhancing technologies, and informed policymaking that aligns with user expectations and societal values.
+
+Authors
+-------
+1. Shuning Zhang <zsn23@mails.tsinghua.edu.cn> (Tsinghua University)
+2. Gengrui Zhang <zgr23@mails.tsinghua.edu.cn> (Tsinghua University)
+3. Yibo Meng <mengyb22@mails.tsinghua.edu.cn> (Tsinghua University)
+4. Ziyi Zhang <ziyiz13@illinois.edu> (Southeast University)
+5. Hantao Zhao <htzhao@seu.edu.cn> (Southeast University)
+6. Xin Yi <yixin@tsinghua.edu.cn> (Tsinghua University)
+7. Hewu Li <lihewu@cernet.edu.cn> (Tsinghua University)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+
+Submission #6: Towards Aligning Personalized AI Agents with Users' Privacy Preference
+=====================================================================================
+
+Abstract
+--------
+The proliferation of AI agents, with their complex and context-dependent actions, renders conventional privacy paradigms obsolete. This position paper argues that the current model of privacy management, rooted in a user's unilateral control over a passive tool, is inherently mismatched with the dynamic and interactive nature of AI agents. We contend that ensuring effective privacy protection necessitates that the agents proactively align with users' privacy preferences instead of passively waiting for the user to control. To ground this shift, and using personalized conversational recommendation agents as a case, we propose a conceptual framework built on Contextual Integrity (CI) theory and Privacy Calculus theory. This synthesis first reframes automatically controlling users' privacy as an alignment problem, where AI agents initially did not know users' preference, and would learn their privacy preferences through implicit or explicit feedback. Upon receiving the preference feedback, the agents used alignment and Pareto optimization for aligning preferences and balancing privacy and utility. We introduced formulations and instantiations, potential applications, as well as five challenges.
+
+Authors
+-------
+1. Shuning Zhang <zsn23@mails.tsinghua.edu.cn> (Tsinghua University)
+2. Ying Ma <yima3@student.unimelb.edu.au> (The University of Melbourne)
+3. Jingruo Chen <jc3564@cornell.edu> (Cornell University)
+4. Simin Li <lisiminsimon@buaa.edu.cn> (Beihang University)
+5. Xin Yi <yixin@tsinghua.edu.cn> (Tsinghua University)
+6. Hewu Li <lihewu@cernet.edu.cn> (Tsinghua University)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Position paper
+
+
+Submission #8: "I Apologize For Not Understanding Your Policy": Exploring the Evaluation of
+User-Managed Access Control Policies by AI Virtual Assistants
+================================================================================================
+
+Abstract
+--------
+The rapid evolution of Artificial Intelligence (AI)-based Virtual Assistants (VAs) e.g., Google Gemini, ChatGPT, Microsoft Copilot, and High-Flyer Deepseek has turned them into convenient interfaces for managing emerging technologies such as Smart Homes, Smart Cars, Electronic Health Records, by means of explicit commands, e.g., prompts, which can be even launched via voice, thus providing
+a very natural interface for end-users. However, the proper specification and evaluation of User-Managed Access Control Policies (U-MAPs), the rules issued and managed by end-users to govern access to sensitive data and device functionality, within these VAs presents significant challenges as this process is crucial for preventing security vulnerabilities and privacy leaks without impacting user experience. This work-in-progress study provides an initial exploratory investigation on whether current publicly-available VAs can manage U-MAPs effectively across differing scenarios. By conducting unstructured to structured tests, we evaluated the comprehension of such VAs, revealing a lack of understanding in varying U-MAP approaches. Our research not only identifies key limitations, but offers valuable insights into how VAs can be further improved to manage complex authorization rules and adapt to dynamic changes.
+
+Authors
+-------
+1. Jennifer Mondragon <jmondragon6@islander.tamucc.edu> (Texas A&M - Corpus Christi)
+2. Gael Cruz <cruzg29@gator.uhd.edu> (University of Houston - Downtown)
+3. Carlos Rubio-Medrano <carlos.rubiomedrano@tamucc.edu> (Texas A&M University - Corpus Christi)
+4. Dvijesh Shastri <shastrid@uhd.edu> (University of Houston - Downtown)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+
+Submission #9: The Impact of LLM Assistance on User Spam Detection
+==================================================================
+
+Abstract
+--------
+Prior research has extensively examined how everyday users detect
+spam emails, revealing a consistent need for additional support
+through features such as automatic detection, secure email tools,
+and labeling mechanisms. However, with the emergence of large
+language models (LLMs), it remains unclear how these tools impact
+users’ decision-making in the context of spam detection. In this
+study, we investigate the role of LLMs as decision-support tools
+and their impact on users’ ability to identify spam. We conduct a
+user study in which participants (N = 295) respond to a total of four
+emails—two spam and two legitimate (ham) messages. Our findings
+suggest that prior educational efforts around spam awareness may
+have positively influenced user decision-making. However, the
+results also highlight users’ tendency to cognitively offload the
+task of spam detection onto external tools like LLMs, underscoring
+the continued need for contextual support to reinforce accurate
+detection and reduce user vulnerability.
+
+Authors
+-------
+1. Alexis Morales Flores <amoralesflores@ucsd.edu> (University of California San Diego)
+2. Jay Jhaveri <jjhaveri@ucsd.edu> (University of California, San Diego)
+3. Aditya Sharma <arsharma@ucsd.edu> (University of California, San Diego)
+4. Sarthak Rege <sarthakrege@gmail.com> (Unaffiliated)
+5. Imani Munyaka <imunyaka@ucsd.edu> (University of California, San Diego)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+
+Submission #10: Evaluating AI cyber capabilities with crowdsourced elicitation
+==============================================================================
+
+Abstract
+--------
+As AI systems become increasingly capable, understanding their offensive cyber potential is critical for informed governance and responsible deployment. However, it's hard to accurately bound their capabilities, and some prior evaluations dramatically underestimated them.
+
+The art of extracting maximum task-specific performance from AIs is called "AI elicitation", and today's safety organizations typically conduct it in-house. In this paper, we explore crowdsourcing elicitation efforts as an alternative to in-house elicitation work.
+
+We host open-access AI tracks at two Capture The Flag (CTF) competitions: _AI vs. Humans_ (400 teams) and _Cyber Apocalypse_ (8000 teams). The AI teams achieve outstanding performance at both events, ranking top-5% and top-10% respectively for a total of \$7500 in bounties.
+
+This impressive performance suggests that open-market elicitation may offer an effective complement to in-house elicitation. We propose elicitation bounties as a practical mechanism for maintaining timely, cost-effective situational awareness of emerging AI capabilities.
+
+Another advantage of open elicitations is the option to collect human performance data at scale. Applying METR's methodology, we found that AI agents can reliably solve cyber challenges requiring one hour or less of effort from a median human CTF participant.
+
+Authors
+-------
+1. Artem Petrov <artem.petrov@palisaderesearch.org> (Palisade Research)
+2. Dmitrii Volkov <dmitrii@palisaderesearch.org> (Palisade Research)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+
+Submission #11: Privi: Assist Users in Authoring Contextual Privacy Rules with an LM Sandbox
+============================================================================================
+
+Abstract
+--------
+Aligning language models (LM) with individual users' latent preferences and internal values, such as privacy considerations, is crucial for enhancing output quality and preventing unwanted privacy leakage. Yet, existing methods struggle to capture individuals' contextualized privacy preferences and formalize them in an extensible and generalizable way to guide model outputs.
+As an initial exploration, we present Privi, an interactive elicitation mechanism that generates synthetic communication scenarios, leverages users' edits of candidate responses to infer privacy preferences, and formalizes them in an extensible privacy rule set. We conducted a within-subjects pilot study (N = 15) to evaluate Privi and the quality of the elicited privacy rules. Results show that responses generated under three conditions: pre-specified rules, elicited rules, no rules (model judgment), were comparable across three key evaluation dimensions: amount of privacy disclosure, perceived utility, and willingness to use. We further analyzed the synthetic scenarios and users' editing behavior and identified future directions for improving Privi.
+
+Authors
+-------
+1. Bingcan Guo <bi.guo@northeastern.edu> (Northeastern University)
+2. Zhiping Zhang <zhang.zhip@northeastern.edu> (Northeastern University)
+3. Tianshi Li <tia.li@northeastern.edu> (Northeastern University)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+
+Submission #12: Iterative Contextual Consent: AI-enabled Data Privacy Contracts
+===============================================================================
+
+Abstract
+--------
+In this position paper, we introduce a theory of “iterative contextual consent” conditioned on individuals’ expected future understanding of the privacy effects of their actions. Specifically, we draw out the implications of end users’ ability to leverage an AI assistant to understand, just-in-time and in detail, the plausible forecasted privacy implications of each of their next proposed uses of online software. Addressing longstanding challenges raised by privacy law scholars, we suggest that users can agree to a service provider’s terms with more meaningful and informed consent when they can credibly anticipate that they will have a more detailed, future understanding of (1) when they are about to share personal data with the service provider and (2) the privacy implications of conveying that data.
+
+Authors
+-------
+1. Daniel D. Slate <dslate@nd.edu> (University of Notre Dame)
+2. Chaoran Chen <cchen25@nd.edu> (University of Notre Dame)
+3. Yaxing Yao <yaxing@vt.edu> (Virginia Tech)
+4. Toby Jia-Jun Li <toby.j.li@nd.edu> (University of Notre Dame)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Position paper
+
+
+Submission #14: Beyond Permissions: Investigating Mobile Personalization with Simulated Personas
+================================================================================================
+
+Abstract
+--------
+Mobile applications increasingly rely on sensor data to infer user context and deliver personalized experiences. Yet, the mechanisms behind this personalization remain opaque to users and researchers alike. This paper presents a sandbox system that uses sensor spoofing and persona simulation to audit and visualize how mobile apps respond to inferred behaviors. Rather than treating spoofing as adversarial, we demonstrate its use as a tool for behavioral transparency and user empowerment. Our system injects multi-sensor profiles—generated from structured, lifestyle-based personas—into Android devices in real time, enabling users to observe app responses to contexts such as high activity, location shifts, or time-of-day changes. With automated screenshot capture and GPT-4 Vision-based UI summarization, our pipeline helps document subtle personalization cues. Preliminary findings show measurable app adaptations across fitness, e-commerce, and everyday service apps such as weather and navigation. We offer this toolkit as a foundation for privacy-enhancing technologies and user-facing transparency interventions.
+
+Authors
+-------
+1. Ibrahim Khalilov <ikhalil1@jh.edu> (Johns Hopkins University)
+2. Chaoran Chen <cchen25@nd.edu> (University of Notre Dame)
+3. Ziang Xiao <ziang.xiao@jhu.edu> (Johns Hopkins University)
+4. Tianshi Li <tia.li@northeastern.edu> (Northeastern University)
+5. Toby Jia-Jun Li <toby.j.li@nd.edu> (University of Notre Dame)
+6. Yaxing Yao <yaxing@jhu.edu> (Johns Hopkins University)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Position paper
+
+
+Submission #15: Speculating Unintended Creepiness: Exploring LLM-Powered Empathy Building for
+Privacy-Aware UX Design
+================================================================================================
+
+Abstract
+--------
+Despite increasing awareness of dark patterns and anti-patterns in UX design, privacy invasive design choices remain prevalent in real world systems. These choices often stem not from malicious intent, but from a lack of structured guidance and contextual understanding among designers. Designers face challenges not only in detecting deceptive interactions, but also in anticipating how certain features may cause harm. Contributing factors such as limited ability to recognize harm, lack of relatable design references, and challenges in connecting abstract privacy principles to concrete design scenarios, particularly when designing for non-dominant user groups. To address this, while currently implemented as a pipeline, PrivacyMotiv is envisioned as a future system that integrates user personas, journey maps, and design audits into a unified tool to help designers identify privacy harms and dark patterns. Grounded in motivation theory and contextual design thinking, our approach supports reasoning across multiple user-feature interactions situated in real world scenarios, with the goal of revealing hidden risks and inspiring designer empathy to promote privacy-aware design for everyone.
+
+Authors
+-------
+1. Zeya Chen <zey.chen@northeastern.edu> (Northeastern University)
+2. Jianing Wen <wen.jiani@northeastern.edu> (Northeastern University)
+3. Toby Jia-Jun Li <toby.j.li@nd.edu> (University of Notre Dame)
+4. Yaxing Yao <yaxing@jhu.edu> (Johns Hopkins University)
+5. Tianshi Li <tia.li@northeastern.edu> (Northeastern University)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Position paper
+
+
+Submission #17: LLM-as-a-Judge for Privacy Evaluation? Exploring the Alignment of Human and LLM
+Perceptions of Privacy in Textual Data
+================================================================================================
+
+Abstract
+--------
+Despite advances in the field of privacy-preserving Natural Language Processing (NLP), a significant challenge remains the accurate *evaluation of privacy*. As a potential solution, using LLMs as a privacy evaluator presents a promising approach – a strategy inspired by its success in other subfields of NLP. In particular, the so-called *LLM-as-a-Judge* paradigm has achieved impressive results on a variety of natural language evaluation tasks, demonstrating high agreement rates with human annotators. Recognizing that *privacy* is both subjective and difficult to define, we investigate whether LLM-as-a-Judge can also be leveraged to evaluate the privacy sensitivity of textual data. Furthermore, we measure how closely LLM evaluations align with human perceptions of privacy in text. Resulting from a study involving 10 datasets, 13 LLMs, and 677 human survey participants, we confirm that privacy is indeed a difficult concept to measure empirically, exhibited by generally low inter-human agreement rates. Nevertheless, we find that LLMs can accurately model a global human privacy perspective, and through an analysis of human and LLM reasoning patterns, we discuss the merits and limitations of LLM-as-a-Judge for privacy evaluation in textual data. Our findings pave the way for exploring the feasibility of LLMs as privacy evaluators, addressing a core challenge in solving pressing privacy issues with innovative technical solutions.
+
+Authors
+-------
+1. Stephen Meisenbacher <stephen.meisenbacher@tum.de> (Technical University of Munich)
+2. Alexandra Klymenko <alexandra.klymenko@tum.de> (Technical University of Munich)
+3. Florian Matthes <matthes@tum.de> (Technical University of Munich)
+
+Submission Type
+---------------
+Paper (full/work-in-progress papers on new research)
+
+Topic
+-----
+* Original paper on new techniques and empirical studies
+
+

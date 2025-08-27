@@ -2,6 +2,96 @@
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
 import { organizers } from '../data/organizers.js'; // Import organizer data
+import abstractsRaw from '../data/haips2025-abstracts.txt?raw';
+
+type Author = {
+    name: string;
+    email?: string;
+    affiliation?: string;
+};
+
+type Submission = {
+    id: string;
+    title: string;
+    abstract: string;
+    authors: Author[];
+    type: 'Paper' | 'Poster' | 'Unknown';
+};
+
+function parseSubmissions(raw: string): Submission[] {
+    const submissions: Submission[] = [];
+    if (!raw) return submissions;
+
+    const blocks = raw
+        .split(/\n(?=Submission\s+#\d+:)/g)
+        .map(b => b.trim())
+        .filter(Boolean);
+
+    for (const block of blocks) {
+        const idMatch = block.match(/^Submission\s+#(\d+):/);
+        const id = idMatch ? idMatch[1] : '';
+
+        const lines = block.split(/\n/);
+        let titleLines: string[] = [];
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            if (/^=+\s*$/.test(line)) {
+                break;
+            }
+            if (i === 0) {
+                titleLines.push(line.replace(/^Submission\s+#\d+:\s*/, '').trim());
+            } else {
+                titleLines.push(line.trim());
+            }
+        }
+        const title = titleLines.join(' ').replace(/\s+/g, ' ').trim();
+
+        let abstract = '';
+        const abstractMatch = block.match(/\nAbstract\n[-]+\n([\s\S]*?)\n\nAuthors\n[-]+/);
+        if (abstractMatch) {
+            abstract = abstractMatch[1].trim().replace(/\n+/g, ' ');
+        }
+
+        const authors: Author[] = [];
+        const authorsSectionMatch = block.match(/\nAuthors\n[-]+\n([\s\S]*?)\n\nSubmission Type/);
+        if (authorsSectionMatch) {
+            const authorLines = authorsSectionMatch[1]
+                .split(/\n/)
+                .map(l => l.trim())
+                .filter(l => /^\d+\./.test(l));
+            for (const authorLine of authorLines) {
+                const nameEmailAff = authorLine.replace(/^\d+\.\s*/, '');
+                const emailMatch = nameEmailAff.match(/<([^>]+)>/);
+                const affiliationMatch = nameEmailAff.match(/\(([^)]+)\)/);
+                const name = nameEmailAff
+                    .replace(/<[^>]+>/, '')
+                    .replace(/\([^)]*\)/, '')
+                    .trim();
+                authors.push({
+                    name,
+                    email: emailMatch ? emailMatch[1] : undefined,
+                    affiliation: affiliationMatch ? affiliationMatch[1] : undefined,
+                });
+            }
+        }
+
+        let type: Submission['type'] = 'Unknown';
+        const typeMatch = block.match(/\nSubmission Type\n[-]+\n([\s\S]*?)\n\nTopic/);
+        if (typeMatch) {
+            const typeLine = typeMatch[1].split(/\n/).map(s => s.trim()).find(Boolean) || '';
+            if (/^Paper\b/i.test(typeLine)) type = 'Paper';
+            else if (/^Poster\b/i.test(typeLine)) type = 'Poster';
+        }
+
+        if (title) {
+            submissions.push({ id, title, abstract, authors, type });
+        }
+    }
+
+    return submissions;
+}
+
+const acceptedSubmissions = parseSubmissions(abstractsRaw);
 ---
 
 <Layout title="Home">
@@ -26,6 +116,41 @@ import { organizers } from '../data/organizers.js'; // Import organizer data
                 <p><strong><a href="https://pgk.io" target="_blank" rel="noopener noreferrer">Patrick Gage Kelley (Google)</a></strong></p>
             </div>
         </div>
+    </section>
+
+    <section id="accepted">
+        <h2>Accepted Papers</h2>
+        <blockquote>
+            Official proceedings will be published in the ACM Digital Library in October.
+        </blockquote>
+
+        {acceptedSubmissions.length === 0 ? (
+            <p>No accepted papers to display yet.</p>
+        ) : (
+            <ul class="accepted-list">
+                {acceptedSubmissions.map((s) => (
+                    <li class="accepted-item">
+                        <div class="accepted-header">
+                            <span class={`badge ${s.type === 'Paper' ? 'badge-paper' : s.type === 'Poster' ? 'badge-poster' : 'badge-unknown'}`}>{s.type}</span>
+                            <h3 class="accepted-title">{s.title}</h3>
+                        </div>
+                        {s.authors.length > 0 && (
+                            <p class="accepted-authors">
+                                <strong>Authors:</strong>
+                                {' '}
+                                {s.authors.map(a => `${a.name}${a.affiliation ? ` (${a.affiliation})` : ''}`).join(', ')}
+                            </p>
+                        )}
+                        {s.abstract && (
+                            <details class="accepted-abstract">
+                                <summary><strong>Abstract</strong></summary>
+                                <p>{s.abstract}</p>
+                            </details>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        )}
     </section>
 
     <section id="cfp">
@@ -328,5 +453,77 @@ import { organizers } from '../data/organizers.js'; // Import organizer data
         text-align: center;
     }
     /* End Keynote Speaker Styles */
+
+    /* Accepted Papers */
+    #accepted .accepted-list {
+        list-style: none;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        margin-top: 1rem;
+    }
+    #accepted .accepted-item {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1rem;
+    }
+    #accepted .accepted-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+    #accepted .accepted-title {
+        margin: 0;
+        font-size: 1.2rem;
+        color: var(--text-primary);
+    }
+    #accepted .accepted-authors {
+        margin: 0.6rem 0 0.4rem 0;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+    }
+    #accepted .accepted-abstract {
+        margin: 0.2rem 0 0 0;
+        font-size: 0.98rem;
+    }
+    #accepted .accepted-abstract summary {
+        cursor: pointer;
+        color: var(--accent-dark);
+        margin-bottom: 0.3rem;
+    }
+    #accepted .accepted-abstract[open] summary {
+        margin-bottom: 0.4rem;
+    }
+    #accepted .accepted-abstract p {
+        margin: 0.2rem 0 0 0;
+    }
+    .badge {
+        display: inline-block;
+        padding: 0.15rem 0.5rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border: 1px solid var(--border-color);
+        background: var(--accent-light);
+        color: var(--accent-dark);
+        white-space: nowrap;
+        margin-top: 0.1rem;
+    }
+    .badge-paper {
+        background: #e8f4ff;
+        color: #0b61a4;
+        border-color: #cfe6fb;
+    }
+    .badge-poster {
+        background: #eef9f0;
+        color: #1e7e34;
+        border-color: #d3efd8;
+    }
+    .badge-unknown {
+        background: var(--accent-light);
+        color: var(--text-secondary);
+    }
 
 </style>
