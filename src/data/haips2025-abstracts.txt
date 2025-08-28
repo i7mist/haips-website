@@ -8,7 +8,7 @@ OpenAI’s generative pre-trained transformer (ChatGPT) is rapidly transforming 
 
 Authors
 -------
-1. Jiwon Chung <0000againism@korea.ac.kr> (School of Cybersecurity, Korea University)
+1. Jiwon Chung <0000againism@korea.ac.kr> (SentBe Inc.; School of Cybersecurity, Korea University)
 2. Hun-yeong Kwon <khy0@korea.ac.kr> (School of Cybersecurity, Korea University)
 
 Submission Type
