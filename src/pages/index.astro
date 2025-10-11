@@ -148,6 +148,30 @@ const acceptedSubmissions = parseSubmissions(abstractsRaw);
         </div>
     </section>
 
+    <section id="program">
+        <h2>Workshop Program</h2>
+        <table class="program-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Session</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>9:00--9:10</td><td>Opening</td></tr>
+                <tr><td>9:10--10:10</td><td>Keynote I</td></tr>
+                <tr><td>10:10--10:30</td><td>Paper Session I</td></tr>
+                <tr><td>10:30--11:00</td><td>Coffee Break</td></tr>
+                <tr><td>11:00--12:00</td><td>Paper Session II</td></tr>
+                <tr><td>12:00--13:30</td><td>Lunch Break</td></tr>
+                <tr><td>13:30--15:00</td><td>Keynote II + Panel</td></tr>
+                <tr><td>15:00--15:30</td><td>Coffee Break</td></tr>
+                <tr><td>15:30--16:50</td><td>"Unconference" format activity</td></tr>
+                <tr><td>16:50--17:00</td><td>End note</td></tr>
+            </tbody>
+        </table>
+    </section>
+
     <section id="accepted">
         <h2>Accepted Papers</h2>
         <blockquote>
@@ -501,6 +525,26 @@ const acceptedSubmissions = parseSubmissions(abstractsRaw);
         }
     }
     /* End Keynote Speaker Styles */
+
+    /* Workshop Program */
+    #program .program-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+    #program th,
+    #program td {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border-color);
+        text-align: left;
+    }
+    #program thead th {
+        background: var(--accent-light);
+        color: var(--accent-dark);
+    }
+    #program tbody tr:nth-child(even) {
+        background: var(--bg-secondary);
+    }
 
     /* Accepted Papers */
     #accepted .accepted-list {
