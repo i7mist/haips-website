@@ -110,14 +110,40 @@ const acceptedSubmissions = parseSubmissions(abstractsRaw);
 
     <section id="keynote-speakers">
         <h2>Keynote Speakers</h2>
-        <div class="keynote-speaker-container">
-            <div class="keynote-speaker">
-                <img src="https://www.cs.cmu.edu/~jasonh/img/portraits/portrait-2013b-big.jpg" alt="Jason Hong (CMU)" class="profile-pic keynote-profile-pic" />
-                <p><strong><a href="https://www.cs.cmu.edu/~jasonh/" target="_blank" rel="noopener noreferrer">Jason Hong (CMU)</a></strong></p>
-            </div>
-            <div class="keynote-speaker">
+        <div class="keynote-list">
+            <div class="keynote-row">
                 <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=4_fN00YAAAAJ&citpid=4" alt="Patrick Gage Kelley (Google)" class="profile-pic keynote-profile-pic" />
-                <p><strong><a href="https://pgk.io" target="_blank" rel="noopener noreferrer">Patrick Gage Kelley (Google)</a></strong></p>
+                <div class="keynote-content">
+                    <p class="keynote-name"><strong><a href="https://pgk.io" target="_blank" rel="noopener noreferrer">Patrick Gage Kelley (Google)</a></strong></p>
+                    <p class="keynote-title">The Promise of AI to Improve Online Safety, Privacy, and Security</p>
+                    <div class="keynote-abstract">
+                        <p>While there’s considerable research on improving the safety, privacy, and security of frontier AI systems, instead, I want us to focus on how we can leverage these models today to improve the internet. I’ll cover work from our team that includes:</p>
+                        <ul>
+                            <li>Broad public opinion polling on what people expect AI can and will do for society</li>
+                            <li>What people’s privacy concerns are with AI</li>
+                            <li>How experts believe AI will empower online safety attackers & defenders</li>
+                            <li>How we can leverage LLMs for content moderation</li>
+                            <li>And how we need to help users by systems inherent AI literacy through design</li>
+                        </ul>
+                        <p>I’ll conclude with a set of open questions and directions for future research and policy.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="keynote-row">
+                <img src="https://www.cs.cmu.edu/~jasonh/img/portraits/portrait-2013b-big.jpg" alt="Jason Hong (CMU)" class="profile-pic keynote-profile-pic" />
+                <div class="keynote-content">
+                    <p class="keynote-name"><strong><a href="https://www.cs.cmu.edu/~jasonh/" target="_blank" rel="noopener noreferrer">Jason Hong (CMU)</a></strong></p>
+                    <p class="keynote-title">Auditing AI Systems for Bias and Fairness</p>
+                    <div class="keynote-abstract">
+                        <p>Auditing is an underexamined but powerful tool for finding systematic problems in AI systems, fostering trust in those systems, and also for holding companies and organizations using AI accountable. Interestingly, many people are already organically coming together to audit many kinds of algorithmic systems. In this talk, I'll give an overview of our team's research in this space over the past 6 years, focusing on:</p>
+                        <ul>
+                            <li>How do people do auditing of algorithmic systems today?</li>
+                            <li>How can we help everyday people audit AI systems?</li>
+                            <li>How can we use AI to help crowds of people with auditing?</li>
+                            <li>How can auditing help with AI literacy?</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -433,28 +459,46 @@ const acceptedSubmissions = parseSubmissions(abstractsRaw);
     #keynote-speakers {
         text-align: center; /* Center the content of the section */
     }
-    .keynote-speaker-container {
-        display: flex;
-        justify-content: center; /* Center the speakers horizontally */
-        align-items: flex-start; /* Align items at the top */
-        gap: 3rem; /* Space between speakers */
-        margin-top: 1.5rem;
-    }
-    .keynote-speaker {
+    .keynote-list {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        max-width: 150px; /* Max width for each speaker block */
+        gap: 2rem;
+        margin-top: 1.5rem;
+        align-items: stretch;
+    }
+    .keynote-row {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 1rem;
+        align-items: start;
+        text-align: left;
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1rem;
     }
     .keynote-profile-pic {
         width: 140px; /* Specific size for keynote profile pics */
         height: 140px; /* Specific size for keynote profile pics */
-        margin-bottom: 0.5rem; /* Space between pic and name */
+        margin-bottom: 0; /* Handled by grid */
     }
-    .keynote-speaker p {
-        margin-top: 0.5rem;
-        font-size: 1em;
-        text-align: center;
+    .keynote-content { margin-left: 0.25rem; }
+    .keynote-name { margin: 0; font-size: 1.05rem; }
+    .keynote-title { margin: 0.25rem 0 0.5rem; font-weight: 600; color: var(--text-primary); }
+    .keynote-abstract p { margin: 0 0 0.5rem; }
+    .keynote-abstract ul { margin: 0 0 0.5rem 1.2rem; }
+    .keynote-abstract li { margin: 0.2rem 0; }
+    @media (max-width: 640px) {
+        .keynote-row {
+            grid-template-columns: 1fr;
+            text-align: left;
+        }
+        .keynote-profile-pic {
+            width: 120px;
+            height: 120px;
+        }
     }
     /* End Keynote Speaker Styles */
 
