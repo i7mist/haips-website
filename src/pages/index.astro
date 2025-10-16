@@ -107,6 +107,11 @@ const preprintLinks: string[] = [
     'https://drive.google.com/file/d/1ZrI7KrJ2C44UUZdLSLeWLpFnxtORHc05/view?usp=sharing',
     'https://drive.google.com/file/d/1C3FDyA_EivKrapeJrx7Pp9euCEkgAQZe/view?usp=sharing'
 ];
+const videoLinksById: Record<string, string> = {
+    '3': 'https://drive.google.com/file/d/1qqjJKR-8WXI4WAP8nENDZUbJrNBAJYsi/view?usp=sharing',
+    '5': 'https://drive.google.com/file/d/1IPVFESStlGkTRn12m45-rRHc45XJQfGw/view?usp=sharing',
+    '6': 'https://drive.google.com/file/d/1Dmv77HhnW8j5ah7TyMA396yjYjkLYKvQ/view?usp=sharing',
+};
 ---
 
 <Layout title="Home">
@@ -204,6 +209,9 @@ const preprintLinks: string[] = [
                             <h3 class="accepted-title">{s.title}</h3>
                             {preprintLinks[idx] && (
                                 <a href={preprintLinks[idx]} target="_blank" rel="noopener noreferrer" class="preprint-link">[Preprint]</a>
+                            )}
+                            {videoLinksById[s.id] && (
+                                <a href={videoLinksById[s.id]} target="_blank" rel="noopener noreferrer" class="video-link">[Video presentation]</a>
                             )}
                         </div>
                         {s.authors.length > 0 && (
@@ -636,6 +644,13 @@ const preprintLinks: string[] = [
         color: var(--text-secondary);
     }
     .preprint-link {
+        margin-left: 0.5rem;
+        font-size: 0.95rem;
+        color: var(--accent-dark);
+        text-decoration: underline;
+        white-space: nowrap;
+    }
+    .video-link {
         margin-left: 0.5rem;
         font-size: 0.95rem;
         color: var(--accent-dark);
