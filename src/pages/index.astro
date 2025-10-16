@@ -92,6 +92,21 @@ function parseSubmissions(raw: string): Submission[] {
 }
 
 const acceptedSubmissions = parseSubmissions(abstractsRaw);
+const preprintLinks: string[] = [
+    'https://drive.google.com/file/d/1_ND2tTnZrq2j8DY-yRD1OFjZnfd8Nipf/view?usp=sharing',
+    'https://drive.google.com/file/d/1mPETg5gHGQKeK4EfLgVJpkDjrnZ3t0c4/view?usp=sharing',
+    'https://drive.google.com/file/d/1g2Jmr9tYyvn3dMrjN5xfzcZofcdX6990/view?usp=sharing',
+    'https://drive.google.com/file/d/1Qjf_xe2YNcWXYCGXCkfJWNWK00Y0N_w3/view?usp=sharing',
+    'https://drive.google.com/file/d/1QcRFap2jhr82ZA4eCzpKrPoh8I-7oXKU/view?usp=sharing',
+    'https://drive.google.com/file/d/1GCxFI1FSwodELchLoJvQ62L3ix-PEvbs/view?usp=sharing',
+    'https://drive.google.com/file/d/1z_laVQPFFJFhDb4fGma1PWg14r6Wknw4/view?usp=sharing',
+    'https://drive.google.com/file/d/16EES5o08Nrvjv4s11n5bFYGaqqxNMWG4/view?usp=sharing',
+    'https://drive.google.com/file/d/1RJ2jnWYxapwLHXDcmAm2Xa-o8tWJS2L0/view?usp=sharing',
+    'https://drive.google.com/file/d/1XKZSwBppsxLuduG57RAoK1s-Xj4Dz8Hb/view?usp=sharing',
+    'https://drive.google.com/file/d/1nZfPh9ua0Og_tKqA13ySFsQ_ggA_K9Go/view?usp=sharing',
+    'https://drive.google.com/file/d/1ZrI7KrJ2C44UUZdLSLeWLpFnxtORHc05/view?usp=sharing',
+    'https://drive.google.com/file/d/1C3FDyA_EivKrapeJrx7Pp9euCEkgAQZe/view?usp=sharing'
+];
 ---
 
 <Layout title="Home">
@@ -182,11 +197,14 @@ const acceptedSubmissions = parseSubmissions(abstractsRaw);
             <p>No accepted papers to display yet.</p>
         ) : (
             <ul class="accepted-list">
-                {acceptedSubmissions.map((s) => (
+                {acceptedSubmissions.map((s, idx) => (
                     <li class="accepted-item">
                         <div class="accepted-header">
                             <span class={`badge ${s.type === 'Paper' ? 'badge-paper' : s.type === 'Poster' ? 'badge-poster' : 'badge-unknown'}`}>{s.type}</span>
                             <h3 class="accepted-title">{s.title}</h3>
+                            {preprintLinks[idx] && (
+                                <a href={preprintLinks[idx]} target="_blank" rel="noopener noreferrer" class="preprint-link">[Preprint]</a>
+                            )}
                         </div>
                         {s.authors.length > 0 && (
                             <p class="accepted-authors">
@@ -616,6 +634,13 @@ const acceptedSubmissions = parseSubmissions(abstractsRaw);
     .badge-unknown {
         background: var(--accent-light);
         color: var(--text-secondary);
+    }
+    .preprint-link {
+        margin-left: 0.5rem;
+        font-size: 0.95rem;
+        color: var(--accent-dark);
+        text-decoration: underline;
+        white-space: nowrap;
     }
 
 </style>
