@@ -214,6 +214,9 @@ const videoLinksById: Record<string, string> = {
                                 <a href={videoLinksById[s.id]} target="_blank" rel="noopener noreferrer" class="video-link">[Video presentation]</a>
                             )}
                         </div>
+                        {s.id === '6' && (
+                            <p class="award-note"><strong>Distinguished Paper Award 🏆</strong></p>
+                        )}
                         {s.authors.length > 0 && (
                             <p class="accepted-authors">
                                 <strong>Authors:</strong>
@@ -616,6 +619,12 @@ const videoLinksById: Record<string, string> = {
     }
     #accepted .accepted-abstract p {
         margin: 0.2rem 0 0 0;
+    }
+    .award-note {
+        margin: 0.25rem 0 0 0;
+        color: var(--accent-dark);
+        font-size: 0.95rem;
+        white-space: nowrap;
     }
     .badge {
         display: inline-block;
