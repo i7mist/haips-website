@@ -5,11 +5,16 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
     title: string;
-    description?: string; // Optional description for meta tag
+    description?: string;
+    siteName?: string;
 }
 
-const { title, description = "HAIPS@CCS 2025: 1st Workshop on Human-Centered AI Privacy and Security" } = Astro.props;
-const pageTitle = `${title} | HAIPS@CCS 2025`;
+const {
+    title,
+    description = "HAIPS@COLM 2026: 2nd Workshop on Human-Centered Privacy and Security for Language Models",
+    siteName = "HAIPS@COLM 2026",
+} = Astro.props;
+const pageTitle = `${title} | ${siteName}`;
 ---
 
 <!doctype html>

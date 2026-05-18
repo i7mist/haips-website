@@ -1,309 +1,190 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
-import { organizers } from '../data/organizers.js'; // Import organizer data
-import abstractsRaw from '../data/haips2025-abstracts.txt?raw';
+import { organizers } from '../data/organizers2026.js';
 
-type Author = {
+type Speaker = {
     name: string;
-    email?: string;
-    affiliation?: string;
+    affiliation: string;
+    website?: string;
+    profilePic?: string;
+    bio: string;
 };
 
-type Submission = {
-    id: string;
-    title: string;
-    abstract: string;
-    authors: Author[];
-    type: 'Paper' | 'Poster' | 'Unknown';
-};
-
-function parseSubmissions(raw: string): Submission[] {
-    const submissions: Submission[] = [];
-    if (!raw) return submissions;
-
-    const blocks = raw
-        .split(/\n(?=Submission\s+#\d+:)/g)
-        .map(b => b.trim())
-        .filter(Boolean);
-
-    for (const block of blocks) {
-        const idMatch = block.match(/^Submission\s+#(\d+):/);
-        const id = idMatch ? idMatch[1] : '';
-
-        const lines = block.split(/\n/);
-        let titleLines: string[] = [];
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i];
-            if (/^=+\s*$/.test(line)) {
-                break;
-            }
-            if (i === 0) {
-                titleLines.push(line.replace(/^Submission\s+#\d+:\s*/, '').trim());
-            } else {
-                titleLines.push(line.trim());
-            }
-        }
-        const title = titleLines.join(' ').replace(/\s+/g, ' ').trim();
-
-        let abstract = '';
-        const abstractMatch = block.match(/\nAbstract\n[-]+\n([\s\S]*?)\n\nAuthors\n[-]+/);
-        if (abstractMatch) {
-            abstract = abstractMatch[1].trim().replace(/\n+/g, ' ');
-        }
-
-        const authors: Author[] = [];
-        const authorsSectionMatch = block.match(/\nAuthors\n[-]+\n([\s\S]*?)\n\nSubmission Type/);
-        if (authorsSectionMatch) {
-            const authorLines = authorsSectionMatch[1]
-                .split(/\n/)
-                .map(l => l.trim())
-                .filter(l => /^\d+\./.test(l));
-            for (const authorLine of authorLines) {
-                const nameEmailAff = authorLine.replace(/^\d+\.\s*/, '');
-                const emailMatch = nameEmailAff.match(/<([^>]+)>/);
-                const affiliationMatch = nameEmailAff.match(/\(([^)]+)\)/);
-                const name = nameEmailAff
-                    .replace(/<[^>]+>/, '')
-                    .replace(/\([^)]*\)/, '')
-                    .trim();
-                authors.push({
-                    name,
-                    email: emailMatch ? emailMatch[1] : undefined,
-                    affiliation: affiliationMatch ? affiliationMatch[1] : undefined,
-                });
-            }
-        }
-
-        let type: Submission['type'] = 'Unknown';
-        const typeMatch = block.match(/\nSubmission Type\n[-]+\n([\s\S]*?)\n\nTopic/);
-        if (typeMatch) {
-            const typeLine = typeMatch[1].split(/\n/).map(s => s.trim()).find(Boolean) || '';
-            if (/^Paper\b/i.test(typeLine)) type = 'Paper';
-            else if (/^Poster\b/i.test(typeLine)) type = 'Poster';
-        }
-
-        if (title) {
-            submissions.push({ id, title, abstract, authors, type });
-        }
-    }
-
-    return submissions;
-}
-
-const acceptedSubmissions = parseSubmissions(abstractsRaw);
-const preprintLinks: string[] = [
-    'https://drive.google.com/file/d/1_ND2tTnZrq2j8DY-yRD1OFjZnfd8Nipf/view?usp=sharing',
-    'https://drive.google.com/file/d/1mPETg5gHGQKeK4EfLgVJpkDjrnZ3t0c4/view?usp=sharing',
-    'https://drive.google.com/file/d/1g2Jmr9tYyvn3dMrjN5xfzcZofcdX6990/view?usp=sharing',
-    'https://drive.google.com/file/d/1Qjf_xe2YNcWXYCGXCkfJWNWK00Y0N_w3/view?usp=sharing',
-    'https://drive.google.com/file/d/1QcRFap2jhr82ZA4eCzpKrPoh8I-7oXKU/view?usp=sharing',
-    'https://drive.google.com/file/d/1GCxFI1FSwodELchLoJvQ62L3ix-PEvbs/view?usp=sharing',
-    'https://drive.google.com/file/d/1z_laVQPFFJFhDb4fGma1PWg14r6Wknw4/view?usp=sharing',
-    'https://drive.google.com/file/d/16EES5o08Nrvjv4s11n5bFYGaqqxNMWG4/view?usp=sharing',
-    'https://drive.google.com/file/d/1RJ2jnWYxapwLHXDcmAm2Xa-o8tWJS2L0/view?usp=sharing',
-    'https://drive.google.com/file/d/1XKZSwBppsxLuduG57RAoK1s-Xj4Dz8Hb/view?usp=sharing',
-    'https://drive.google.com/file/d/1nZfPh9ua0Og_tKqA13ySFsQ_ggA_K9Go/view?usp=sharing',
-    'https://drive.google.com/file/d/1ZrI7KrJ2C44UUZdLSLeWLpFnxtORHc05/view?usp=sharing',
-    'https://drive.google.com/file/d/1C3FDyA_EivKrapeJrx7Pp9euCEkgAQZe/view?usp=sharing'
+const speakers: Speaker[] = [
+    {
+        name: 'Helen Nissenbaum',
+        affiliation: 'Cornell Tech',
+        website: 'https://nissenbaum.tech.cornell.edu/',
+        profilePic: '/speaker-helen-nissenbaum.jpg',
+        bio: 'Andrew H. and Ann R. Tisch Professor of Information Science at Cornell Tech, known for developing the influential theory of contextual integrity. Her research spans privacy theory, policy, and values in technology design.',
+    },
+    {
+        name: 'Ruoxi Jia',
+        affiliation: 'Virginia Tech',
+        website: 'https://ruoxijia.info/',
+        profilePic: '/speaker-ruoxi-jia.jpg',
+        bio: 'Assistant Professor in the Bradley Department of Electrical and Computer Engineering at Virginia Tech. Her research focuses on data valuation, privacy-preserving machine learning, and differential privacy.',
+    },
+    {
+        name: 'Maarten Sap',
+        affiliation: 'Carnegie Mellon University',
+        website: 'https://maartensap.com/',
+        profilePic: '/speaker-maarten-sap.jpg',
+        bio: '2025 Packard Fellow and Assistant Professor at CMU’s Language Technologies Institute. His research focuses on social intelligence in NLP, including theory of mind, social bias, and safety in human-AI interactions.',
+    },
+    {
+        name: 'Nina Taft',
+        affiliation: 'Google',
+        website: 'https://research.google/people/nina-taft/',
+        profilePic: '/speaker-nina-taft.png',
+        bio: 'Principal Research Scientist at Google leading the Applied Privacy Research group. Her work applies NLP and machine learning to build privacy assistance tools for users and developers at scale.',
+    },
+    {
+        name: 'Florian Tramèr',
+        affiliation: 'ETH Zurich',
+        website: 'https://floriantramer.com/',
+        profilePic: '/speaker-florian-tramer.png',
+        bio: 'Assistant Professor of Computer Science at ETH Zurich, where he leads the SPY Lab. His research focuses on ML security and privacy, including training data extraction from language models and adversarial robustness.',
+    },
 ];
-const videoLinksById: Record<string, string> = {
-    '3': 'https://drive.google.com/file/d/1qqjJKR-8WXI4WAP8nENDZUbJrNBAJYsi/view?usp=sharing',
-    '5': 'https://drive.google.com/file/d/1IPVFESStlGkTRn12m45-rRHc45XJQfGw/view?usp=sharing',
-    '6': 'https://drive.google.com/file/d/1Dmv77HhnW8j5ah7TyMA396yjYjkLYKvQ/view?usp=sharing',
-};
+
+type ScheduleItem = { time: string; session: string };
+const schedule: ScheduleItem[] = [
+    { time: '9:00',  session: 'Opening remarks' },
+    { time: '9:10',  session: 'Invited talks I (2 talks)' },
+    { time: '10:05', session: 'Coffee + poster session' },
+    { time: '10:35', session: 'Invited talks II (3 talks)' },
+    { time: '12:00', session: 'Lunch' },
+    { time: '13:30', session: 'Spotlight presentations' },
+    { time: '14:15', session: 'Panel (all speakers)' },
+    { time: '15:00', session: 'Coffee + poster session' },
+    { time: '15:30', session: 'Unconference discussions' },
+    { time: '16:30', session: 'Report-backs + closing' },
+];
 ---
 
 <Layout title="Home">
-    
+
     <img src="/haips-banner.png" alt="HAIPS Workshop Banner" class="hero-image">
 
     <p>
-    <strong>
-    We are excited to announce the 1st workshop on Human-Centered AI Privacy and Security (HAIPS, pronounced "hypes"), co-located with <a href="https://www.sigsac.org/ccs/CCS2025/">ACM CCS 2025</a>!
-    </strong>
-    </p>
-    <strong>
-      Register now: <a href="https://www.sigsac.org/ccs/CCS2025/registration/">https://www.sigsac.org/ccs/CCS2025/registration/</a>
-    </strong>
+        <strong>
+            We are excited to announce the 2nd workshop on Human-Centered Privacy and Security for Language Models (HAIPS@COLM), co-located with <a href="https://colmweb.org/" target="_blank" rel="noopener noreferrer">COLM 2026</a> in San Francisco on October 9, 2026.
+        </strong>
     </p>
 
-    <section id="keynote-speakers">
-        <h2>Keynote Speakers</h2>
-        <div class="keynote-list">
-            <div class="keynote-row">
-                <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=4_fN00YAAAAJ&citpid=4" alt="Patrick Gage Kelley (Google)" class="profile-pic keynote-profile-pic" />
-                <div class="keynote-content">
-                    <p class="keynote-name"><strong><a href="https://pgk.io" target="_blank" rel="noopener noreferrer">Patrick Gage Kelley (Google)</a></strong></p>
-                    <p class="keynote-title">The Promise of AI to Improve Online Safety, Privacy, and Security</p>
-                    <div class="keynote-abstract">
-                        <p>While there’s considerable research on improving the safety, privacy, and security of frontier AI systems, instead, I want us to focus on how we can leverage these models today to improve the internet. I’ll cover work from our team that includes:</p>
-                        <ul>
-                            <li>Broad public opinion polling on what people expect AI can and will do for society</li>
-                            <li>What people’s privacy concerns are with AI</li>
-                            <li>How experts believe AI will empower online safety attackers & defenders</li>
-                            <li>How we can leverage LLMs for content moderation</li>
-                            <li>And how we need to help users by systems inherent AI literacy through design</li>
-                        </ul>
-                        <p>I’ll conclude with a set of open questions and directions for future research and policy.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="keynote-row">
-                <img src="https://www.cs.cmu.edu/~jasonh/img/portraits/portrait-2013b-big.jpg" alt="Jason Hong (CMU)" class="profile-pic keynote-profile-pic" />
-                <div class="keynote-content">
-                    <p class="keynote-name"><strong><a href="https://www.cs.cmu.edu/~jasonh/" target="_blank" rel="noopener noreferrer">Jason Hong (CMU)</a></strong></p>
-                    <p class="keynote-title">Auditing AI Systems for Bias and Fairness</p>
-                    <div class="keynote-abstract">
-                        <p>Auditing is an underexamined but powerful tool for finding systematic problems in AI systems, fostering trust in those systems, and also for holding companies and organizations using AI accountable. Interestingly, many people are already organically coming together to audit many kinds of algorithmic systems. In this talk, I'll give an overview of our team's research in this space over the past 6 years, focusing on:</p>
-                        <ul>
-                            <li>How do people do auditing of algorithmic systems today?</li>
-                            <li>How can we help everyday people audit AI systems?</li>
-                            <li>How can we use AI to help crowds of people with auditing?</li>
-                            <li>How can auditing help with AI literacy?</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <p>
+        Language models are rapidly becoming embedded in the interaction fabric of our society &mdash; as assistants, tutors, collaborators, and autonomous agents across domains from healthcare to software engineering to creative work. Their versatility makes them uniquely powerful but also uniquely hard to secure: privacy and security risks arise not just from model internals but from the rich, open-ended ways people interact with and through these systems. Humans sit at the center of these challenges &mdash; as victims of privacy violations and manipulation, as intentional or unintentional facilitators of risk, and as bystanders whose data is swept up without consent.
+    </p>
+
+    <p>
+        HAIPS@COLM aims to bring a human-centered, interdisciplinary lens to LM privacy and security, building on the <a href="/haips2025">1st HAIPS Workshop</a> held at ACM CCS 2025. We aim to foster a two-way exchange between the COLM community and researchers in HCI, usable security, and policy &mdash; grounding human-centered approaches in what LMs actually do, and informing model design with how people actually experience them.
+    </p>
+
+    <section id="dates">
+        <h2>Key Dates</h2>
+        <ul class="styled-list">
+            <li><strong>Submission Deadline:</strong> June 23, 2026</li>
+            <li><strong>Notification of Acceptance:</strong> July 24, 2026</li>
+            <li><strong>Camera-Ready Deadline:</strong> August 20, 2026</li>
+            <li><strong>Workshop Date:</strong> October 9, 2026</li>
+        </ul>
     </section>
 
-    <section id="program">
-        <h2>Workshop Program</h2>
-        <table class="program-table">
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Session</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>9:00--9:10</td><td>Opening</td></tr>
-                <tr><td>9:10--10:10</td><td>Keynote I</td></tr>
-                <tr><td>10:10--10:30</td><td>Paper Session I</td></tr>
-                <tr><td>10:30--11:00</td><td>Coffee Break</td></tr>
-                <tr><td>11:00--12:00</td><td>Paper Session II</td></tr>
-                <tr><td>12:00--13:30</td><td>Lunch Break</td></tr>
-                <tr><td>13:30--15:00</td><td>Keynote II + Panel</td></tr>
-                <tr><td>15:00--15:30</td><td>Coffee Break</td></tr>
-                <tr><td>15:30--16:50</td><td>"Unconference" format activity</td></tr>
-                <tr><td>16:50--17:00</td><td>End note</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section id="accepted">
-        <h2>Accepted Papers</h2>
-        <blockquote>
-            Official proceedings will be published in the ACM Digital Library in October.
-        </blockquote>
-
-        {acceptedSubmissions.length === 0 ? (
-            <p>No accepted papers to display yet.</p>
-        ) : (
-            <ul class="accepted-list">
-                {acceptedSubmissions.map((s, idx) => (
-                    <li class="accepted-item">
-                        <div class="accepted-header">
-                            <span class={`badge ${s.type === 'Paper' ? 'badge-paper' : s.type === 'Poster' ? 'badge-poster' : 'badge-unknown'}`}>{s.type}</span>
-                            <h3 class="accepted-title">{s.title}</h3>
-                            {preprintLinks[idx] && (
-                                <a href={preprintLinks[idx]} target="_blank" rel="noopener noreferrer" class="preprint-link">[Preprint]</a>
+    <section id="speakers">
+        <h2>Invited Speakers</h2>
+        <ul class="speakers-list">
+            {speakers.map(s => (
+                <li class="speaker-item">
+                    {s.profilePic ? (
+                        <img src={s.profilePic} alt={`Profile photo of ${s.name}`} class="speaker-pic" />
+                    ) : (
+                        <div class="speaker-pic speaker-pic-placeholder"></div>
+                    )}
+                    <div class="speaker-body">
+                        <div class="speaker-name">
+                            {s.website ? (
+                                <a href={s.website} target="_blank" rel="noopener noreferrer"><strong>{s.name}</strong></a>
+                            ) : (
+                                <strong>{s.name}</strong>
                             )}
-                            {videoLinksById[s.id] && (
-                                <a href={videoLinksById[s.id]} target="_blank" rel="noopener noreferrer" class="video-link">[Video presentation]</a>
-                            )}
+                            <span class="speaker-affil">({s.affiliation})</span>
                         </div>
-                        {s.id === '6' && (
-                            <p class="award-note"><strong>Distinguished Paper Award 🏆</strong></p>
-                        )}
-                        {s.authors.length > 0 && (
-                            <p class="accepted-authors">
-                                <strong>Authors:</strong>
-                                {' '}
-                                {s.authors.map(a => `${a.name}${a.affiliation ? ` (${a.affiliation})` : ''}`).join(', ')}
-                            </p>
-                        )}
-                        {s.abstract && (
-                            <details class="accepted-abstract">
-                                <summary><strong>Abstract</strong></summary>
-                                <p>{s.abstract}</p>
-                            </details>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        )}
+                        <p class="speaker-bio">{s.bio}</p>
+                    </div>
+                </li>
+            ))}
+        </ul>
     </section>
 
     <section id="cfp">
         <h2>Call for Submissions</h2>
         <p>
-            Recent advances in artificial intelligence (AI) and machine learning (ML) create and exacerbate new security, privacy, and safety risks, from inferring personal attributes, generating non-consensual intimate imagery, to voice cloning, to spear phishing. At the same time, AI can afford new opportunities to address long standing end-user security and privacy challenges. We welcome participants who work on topics related to AI/ML security and privacy from human-centered perspectives. Interested participants will be asked to contribute a paper to the workshop. 
+            We invite submissions on human-centered privacy and security for language models. Topics include, but are not limited to:
         </p>
-
-        <h3>Topics of Interest</h3>
-        <p>Topics of interest include, but are not limited to:</p>
         <ul>
-            <li>Human-centered evaluation of privacy, security, and safety vulnerabilities in emerging AI technologies</li>
-            <li>Users' mental models, behaviors, and preferences about privacy, security, and safety in AI systems</li>
-            <li>Usable security mechanisms and privacy-enhancing technologies in AI systems</li>
-            <li>Novel applications of AI for human-centered privacy, security, and safety management, education, and design</li>
-            <li>Security, privacy, safety, and human autonomy in agentic AI systems</li>
-            <li>Security, privacy, and safety risks and mitigation related to AI practitioners</li>
-            <li>Human-centered evaluation and analysis of laws and policies in reaction to emerging privacy, security, and safety threats caused by AI</li>
-            <li>Societal impact of AI on privacy, security, safety and its tensions with other requirements (e.g., fairness)</li>
-            <li>Position papers outlining a novel research agenda for human-centered privacy, security, and safety in the context of AI</li>
+            <li>Training data privacy and consent</li>
+            <li>User disclosure and interaction privacy</li>
+            <li>Agentic system risks (context leakage, prompt injection, human oversight)</li>
+            <li>Inference and aggregation threats, and human-centered defenses</li>
+            <li>LMs as human simulators (consent, representational harms, simulated users for auditing)</li>
+            <li>Dark patterns, manipulation, and social engineering in or facilitated by LM systems</li>
+            <li>LM-powered privacy/security tools and education</li>
+            <li>Practitioner risks (insecure AI-generated code, concealed AI use)</li>
+            <li>Policy and governance for LM privacy and security</li>
+            <li>Societal impacts, including tensions with fairness and transparency</li>
         </ul>
 
-        We welcome submissions with the following three types of contributions:
-        <ol>
-            <li>Original papers on new techniques and empirical studies;</li>
-            <li>Systematization-of-knowledge papers;</li>
-            <li>Position papers.</li>
-        </ol>
+        <p>We welcome both <strong>original research papers</strong> and <strong>position papers</strong>.</p>
 
-
-        <h3>Submission Types and Format</h3>
-        We welcome two types of submissions: (1) Papers and (2) Posters. The first type is archival, meaning that accepted submissions will be published in the ACM Digital Library. The second type is non-archival and includes encore submissions featuring recently published research. The authors can specify the type in the submission form.
-        <h4>Papers</h4>
-            <p>
-                At most 10 pages in the ACM double-column format (sigconf in the ACM template<a href="https://www.acm.org/publications/proceedings-template" target="_blank" rel="noopener noreferrer">*</a>), excluding references and appendices.
-                Note that we also welcome shorter work-in-progress papers (similar to CHI Late-Breaking Work) that can benefit from early feedback opportunities while still retaining the potential to develop into full publications in the future.
-            </p>
-            <p><small>
-                <strong>Note for LaTeX users:</strong> Please use <code>{'\\documentclass[sigconf,anonymous]{acmart}'}</code> for submission. For the camera ready version, please use <code>{'\\documentclass[sigconf]{acmart}'}</code>.
-            </small></p>
-
-            <p>Accepted papers will be published in the ACM Digital Library.</p>
-
-        <h4>Posters</h4>
-            <p>
-                Poster submissions are intended for encore presentations of research published in 2023 or later. The submission should include a poster draft and a one-page single-column document with the following information: Full bibliographic reference (title, authors, date, venue, etc.) to the paper, Abstract of the original paper, and Link/DOI to the published paper
-            </p>
+        <h3>Submission Format</h3>
+        <ul>
+            <li><strong>Long papers:</strong> up to 8 pages, excluding references and appendices.</li>
+            <li><strong>Short papers:</strong> up to 4 pages, excluding references and appendices.</li>
+            <li>Submissions must use the <a href="https://colmweb.org/cfp.html" target="_blank" rel="noopener noreferrer">COLM format</a>.</li>
+            <li>Accepted papers are <strong>non-archival</strong>, leaving authors free to submit revised versions to other venues.</li>
+        </ul>
 
         <h3>Review Process</h3>
-        <p>Paper submissions will undergo a double-blind review process. Selections will be based on the quality of the submission and diversity of perspectives to foster meaningful knowledge exchange among a broad range of stakeholders.</p>
-        <p>Poster submissions will undergo a single-blind review process. Selections will be based on the quality of the poster draft, relevance of the topic, and diversity of perspectives to foster meaningful knowledge exchange among a broad range of stakeholders.</p>
+        <p>
+            Review will be <strong>double-blind on OpenReview</strong>, with at least two reviewers per paper. Conflicts of interest will be managed through OpenReview&rsquo;s COI detection and self-declared conflicts.
+        </p>
 
-        <h4>Awards</h4>
-        <p>Paper and poster awards will be established to recognize outstanding works.</>
+        <h3>Awards</h3>
+        <p>
+            We aim to establish <strong>Best Paper</strong> and <strong>Best Student Paper</strong> awards to highlight outstanding work, with particular attention to early-career researchers.
+        </p>
+
+        <p><em>The OpenReview submission link will be announced closer to the deadline. Please check back for updates.</em></p>
+    </section>
+
+    <section id="program">
+        <h2>Tentative Schedule</h2>
+        <table class="program-table">
+            <thead>
+                <tr><th>Time</th><th>Session</th></tr>
+            </thead>
+            <tbody>
+                {schedule.map(item => (
+                    <tr><td>{item.time}</td><td>{item.session}</td></tr>
+                ))}
+            </tbody>
+        </table>
     </section>
 
     <section id="organization">
-        <h2>Organizing Committee</h2>
-        <div class="committee-section">
-            <h3>Workshop Chairs</h3>
-            <ul class="organizer-list chairs-steering">
-                {organizers.chairs.map(chair => (
-                    <li>
-                        {/* Use chair.profilePic if available, otherwise show placeholder */}
-                        {chair.profilePic ? (
-                            <img src={chair.profilePic} alt={`Profile photo of ${chair.name}`} class="profile-pic" />
-                        ) : (
-                            <div class="profile-pic-placeholder"></div>
-                        )}
-                        <div class="organizer-details">
+        <h2>Organizers</h2>
+        <ul class="organizer-list chairs-steering">
+            {organizers.chairs.map(chair => (
+                <li class="organizer-row">
+                    {chair.profilePic ? (
+                        <img src={chair.profilePic} alt={`Profile photo of ${chair.name}`} class="profile-pic" />
+                    ) : (
+                        <div class="profile-pic-placeholder"></div>
+                    )}
+                    <div class="organizer-details">
+                        <div class="organizer-name">
                             {chair.website && chair.website !== '#' ? (
                                 <a href={chair.website} target="_blank" rel="noopener noreferrer">
                                     <strong>{chair.name}</strong>
@@ -311,112 +192,28 @@ const videoLinksById: Record<string, string> = {
                             ) : (
                                 <strong>{chair.name}</strong>
                             )}
-                            ({chair.affiliation})
+                            <span class="organizer-affil">({chair.affiliation})</span>
                         </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-
-        <div class="committee-section">
-            <h3>Steering Committee</h3>
-            <ul class="organizer-list chairs-steering">
-                {organizers.steeringCommittee.map(member => (
-                    <li>
-                        {/* Use member.profilePic if available, otherwise show placeholder */}
-                        {member.profilePic ? (
-                            <img src={member.profilePic} alt={`Profile photo of ${member.name}`} class="profile-pic" />
-                        ) : (
-                            <div class="profile-pic-placeholder"></div>
-                        )}
-                        <div class="organizer-details">
-                            {member.website && member.website !== '#' ? (
-                                <a href={member.website} target="_blank" rel="noopener noreferrer">
-                                    <strong>{member.name}</strong>
-                                </a>
-                            ) : (
-                                <strong>{member.name}</strong>
-                            )}
-                            ({member.affiliation})
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-
-        <div class="committee-section">
-            <h3>Program Committee</h3>
-            <p>Includes Workshop Chairs and:</p>
-            <ul class="organizer-list chairs-steering">
-                {organizers.programCommittee.map(member => (
-                    <li>
-                        {/* Use member.profilePic if available, otherwise show placeholder */}
-                        {member.profilePic ? (
-                            <img src={member.profilePic} alt={`Profile photo of ${member.name}`} class="profile-pic" />
-                        ) : (
-                            <div class="profile-pic-placeholder"></div>
-                        )}
-                        <div class="organizer-details">
-                            {member.website && member.website !== '#' ? (
-                                <a href={member.website} target="_blank" rel="noopener noreferrer">
-                                    <strong>{member.name}</strong>
-                                </a>
-                            ) : (
-                                <strong>{member.name}</strong>
-                            )}
-                            ({member.affiliation})
-                        </div>
-                    </li>
-                ))}
-            </ul>
-            <p><em>More PC members to be confirmed.</em></p>
-        </div>
-    </section>
-
-    <section id="submission">
-        <h2>Paper Submission</h2>
-
-        <p>
-            Submission site is open! <a href="https://haips2025.hotcrp.com">https://haips2025.hotcrp.com/</a>
-        </p>
-
-        <p>
-            Please refer to the <a href="/#cfp">Call for Submissions</a> section for information on topics and formatting.
-        </p>
-
-    </section>
-
-    <section id="dates">
-        <h2>Important Dates</h2>
-        <ul class="styled-list">
-            <li><strong>Submission Deadline:</strong> June 20, 2025</li>
-            <li><strong>Notification of Acceptance:</strong> August 8, 2025 </li>
-            <li><strong>Camera-Ready Deadline:</strong> August 22, 2025</li>
-            <li><strong>Workshop Date:</strong> Oct 17, 2025</li>
+                        {chair.bio && <p class="organizer-bio">{chair.bio}</p>}
+                    </div>
+                </li>
+            ))}
         </ul>
     </section>
-
 
 </Layout>
 
 <style>
-    .tagline {
-        font-size: 1.2rem;
-        color: var(--text-secondary);
-        margin-top: -1em;
-        margin-bottom: 2em;
-    }
     .hero-image {
         width: 100%;
-        /* max-height: 300px; */ /* Allow full height */
-        object-fit: cover; 
-        margin-bottom: 1rem; /* Reduced value */
+        object-fit: cover;
+        margin-bottom: 1rem;
         border-radius: 8px;
-        background-color: var(--bg-secondary); /* Placeholder color */
+        background-color: var(--bg-secondary);
     }
     section {
         margin-bottom: 3rem;
-        padding-top: 1rem; /* Add padding to space below fixed header */
+        padding-top: 1rem;
     }
     section h2 {
         margin-top: 0;
@@ -437,7 +234,7 @@ const videoLinksById: Record<string, string> = {
         position: relative;
     }
     .styled-list li::before {
-        content: '\25AA'; /* Square bullet */
+        content: '\25AA';
         color: var(--accent);
         position: absolute;
         left: 0;
@@ -445,117 +242,59 @@ const videoLinksById: Record<string, string> = {
         font-size: 0.8em;
     }
 
-    /* Styles from organization.astro */
-    .committee-section {
-        margin-bottom: 2rem;
-    }
-    .organizer-list {
+    /* Speakers */
+    .speakers-list {
         list-style: none;
         padding-left: 0;
-        margin-top: 1rem; 
-    }
-
-    .organizer-list.chairs-steering li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-
-    .profile-pic-placeholder,
-    .profile-pic {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-right: 1rem;
-        flex-shrink: 0;
-    }
-
-    .profile-pic-placeholder {
-        background-color: var(--accent-light); /* Placeholder color */
-    }
-
-    .profile-pic {
-        object-fit: cover; /* Ensure image covers the circle nicely */
-    }
-
-    .organizer-details {
-        flex-grow: 1;
-    }
-
-    .organizer-list strong {
-        margin-bottom: 0;
-        font-size: 1em;
-        color: var(--text-primary);
-    }
-
-    .organizer-list a {
-        font-size: 0.9em;
-    }
-
-    /* Adjustments for single page */
-    h2 {
-        margin-top: 2rem;
-    }
-    /* Specific style overrides if needed */
-    #cfp ol,
-    #cfp ul {
-        margin-left: 1.5em;
-    }
-    #cfp ul {
-        list-style: disc;
-    }
-    #cfp ol {
-        list-style: decimal;
-    }
-
-    /* Keynote Speaker Styles */
-    #keynote-speakers {
-        text-align: center; /* Center the content of the section */
-    }
-    .keynote-list {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-        margin-top: 1.5rem;
-        align-items: stretch;
-    }
-    .keynote-row {
-        display: grid;
-        grid-template-columns: 150px 1fr;
         gap: 1rem;
-        align-items: start;
-        text-align: left;
-        max-width: 900px;
-        margin: 0 auto;
+        margin-top: 1rem;
+    }
+    .speaker-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
         background: var(--bg-secondary);
         border: 1px solid var(--border-color);
         border-radius: 8px;
-        padding: 1rem;
+        padding: 0.9rem 1rem;
     }
-    .keynote-profile-pic {
-        width: 140px; /* Specific size for keynote profile pics */
-        height: 140px; /* Specific size for keynote profile pics */
-        margin-bottom: 0; /* Handled by grid */
+    .speaker-pic {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        object-fit: cover;
+        background-color: var(--accent-light);
     }
-    .keynote-content { margin-left: 0.25rem; }
-    .keynote-name { margin: 0; font-size: 1.05rem; }
-    .keynote-title { margin: 0.25rem 0 0.5rem; font-weight: 600; color: var(--text-primary); }
-    .keynote-abstract p { margin: 0 0 0.5rem; }
-    .keynote-abstract ul { margin: 0 0 0.5rem 1.2rem; }
-    .keynote-abstract li { margin: 0.2rem 0; }
-    @media (max-width: 640px) {
-        .keynote-row {
-            grid-template-columns: 1fr;
-            text-align: left;
+    .speaker-pic-placeholder {
+        background-color: var(--accent-light);
+    }
+    .speaker-body {
+        flex-grow: 1;
+    }
+    .speaker-name {
+        font-size: 1.05rem;
+    }
+    .speaker-affil {
+        color: var(--text-secondary);
+        margin-left: 0.4rem;
+        font-size: 0.95rem;
+    }
+    .speaker-bio {
+        margin: 0.4rem 0 0 0;
+        font-size: 0.97rem;
+    }
+    @media (max-width: 520px) {
+        .speaker-item {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
-        .keynote-profile-pic {
-            width: 120px;
-            height: 120px;
-        }
     }
-    /* End Keynote Speaker Styles */
 
-    /* Workshop Program */
+    /* Schedule */
     #program .program-table {
         width: 100%;
         border-collapse: collapse;
@@ -575,96 +314,58 @@ const videoLinksById: Record<string, string> = {
         background: var(--bg-secondary);
     }
 
-    /* Accepted Papers */
-    #accepted .accepted-list {
+    /* Organizers */
+    .organizer-list {
         list-style: none;
         padding-left: 0;
+        margin-top: 1rem;
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
-        margin-top: 1rem;
+        gap: 1rem;
     }
-    #accepted .accepted-item {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 1rem;
-    }
-    #accepted .accepted-header {
+    .organizer-list .organizer-row {
         display: flex;
         align-items: flex-start;
-        gap: 0.6rem;
+        gap: 1rem;
     }
-    #accepted .accepted-title {
-        margin: 0;
-        font-size: 1.2rem;
-        color: var(--text-primary);
+    .profile-pic-placeholder,
+    .profile-pic {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        flex-shrink: 0;
     }
-    #accepted .accepted-authors {
-        margin: 0.6rem 0 0.4rem 0;
+    .profile-pic-placeholder {
+        background-color: var(--accent-light);
+    }
+    .profile-pic {
+        object-fit: cover;
+    }
+    .organizer-details {
+        flex-grow: 1;
+    }
+    .organizer-name {
+        font-size: 1.05rem;
+    }
+    .organizer-affil {
         color: var(--text-secondary);
+        margin-left: 0.4rem;
         font-size: 0.95rem;
     }
-    #accepted .accepted-abstract {
-        margin: 0.2rem 0 0 0;
-        font-size: 0.98rem;
-    }
-    #accepted .accepted-abstract summary {
-        cursor: pointer;
-        color: var(--accent-dark);
-        margin-bottom: 0.3rem;
-    }
-    #accepted .accepted-abstract[open] summary {
-        margin-bottom: 0.4rem;
-    }
-    #accepted .accepted-abstract p {
-        margin: 0.2rem 0 0 0;
-    }
-    .award-note {
-        margin: 0.25rem 0 0 0;
-        color: var(--accent-dark);
-        font-size: 0.95rem;
-        white-space: nowrap;
-    }
-    .badge {
-        display: inline-block;
-        padding: 0.15rem 0.5rem;
-        border-radius: 999px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        border: 1px solid var(--border-color);
-        background: var(--accent-light);
-        color: var(--accent-dark);
-        white-space: nowrap;
-        margin-top: 0.1rem;
-    }
-    .badge-paper {
-        background: #e8f4ff;
-        color: #0b61a4;
-        border-color: #cfe6fb;
-    }
-    .badge-poster {
-        background: #eef9f0;
-        color: #1e7e34;
-        border-color: #d3efd8;
-    }
-    .badge-unknown {
-        background: var(--accent-light);
-        color: var(--text-secondary);
-    }
-    .preprint-link {
-        margin-left: 0.5rem;
-        font-size: 0.95rem;
-        color: var(--accent-dark);
-        text-decoration: underline;
-        white-space: nowrap;
-    }
-    .video-link {
-        margin-left: 0.5rem;
-        font-size: 0.95rem;
-        color: var(--accent-dark);
-        text-decoration: underline;
-        white-space: nowrap;
+    .organizer-bio {
+        margin: 0.35rem 0 0 0;
+        font-size: 0.97rem;
     }
 
+    /* CFP list styling */
+    #cfp ul,
+    #cfp ol {
+        margin-left: 1.5em;
+    }
+    #cfp ul {
+        list-style: disc;
+    }
+    #cfp ol {
+        list-style: decimal;
+    }
 </style>

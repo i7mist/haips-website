@@ -2,13 +2,12 @@
 // src/components/Header.astro
 const navLinks = [
     { href: '/#', text: 'Home' },
-    { href: '/#keynote-speakers', text: 'Keynote' },
-    { href: '/#program', text: 'Program' },
-    { href: '/#accepted', text: 'Accepted Papers' },
+    { href: '/#dates', text: 'Key Dates' },
+    { href: '/#speakers', text: 'Speakers' },
     { href: '/#cfp', text: 'Call for Submissions' },
-    { href: '/#organization', text: 'Organization' },
-    { href: '/#submission', text: 'Submission' },
-    { href: '/#dates', text: 'Important Dates' },
+    { href: '/#program', text: 'Schedule' },
+    { href: '/#organization', text: 'Organizers' },
+    { href: '/haips2025', text: 'Archive (2025)' },
 ];
 ---
 
@@ -16,8 +15,8 @@ const navLinks = [
     <div class="container">
         <div class="logo">
             <a href="/#">
-                <h1>HAIPS@CCS 2025</h1>
-                <p class="subtitle">1st Workshop on Human-Centered AI Privacy and Security</p>
+                <h1>HAIPS@COLM 2026</h1>
+                <p class="subtitle">2nd Workshop on Human-Centered Privacy and Security for Language Models</p>
             </a>
         </div>
         <nav>
@@ -34,61 +33,52 @@ const navLinks = [
     const header = document.querySelector('header');
 
     const handleScroll = () => {
-        if (window.scrollY > 10) { // Use a small threshold like 10px
+        if (window.scrollY > 10) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
     };
 
-    // Run on initial load
-    handleScroll(); 
-
-    // Add scroll event listener
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
-
-    // Optional: Clean up listener on component unmount (Astro handles this implicitly in most cases, but good practice)
-    // window.addEventListener('astro:page-load', () => { // Example cleanup if needed for SPA transitions 
-    //     window.removeEventListener('scroll', handleScroll);
-    // });
-
 </script>
 
 <style>
     header {
-        position: fixed; /* Keep header at the top */
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 1000; /* Ensure header stays above other content */
-        background-color: var(--bg-primary); /* Use primary background for fixed header */
+        z-index: 1000;
+        background-color: var(--bg-primary);
         padding: 1rem 0;
         border-bottom: 1px solid var(--border-color);
-        transition: box-shadow 0.3s ease; /* Add transition for smooth shadow appearance */
+        transition: box-shadow 0.3s ease;
     }
 
     header.scrolled {
-         box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Apply shadow only when scrolled */
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .container {
-        max-width: 1000px; /* Wider container for header */
+        max-width: 1000px;
         margin: 0 auto;
         padding: 0 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        flex-wrap: wrap;
     }
     .logo a {
         text-decoration: none;
-        color: inherit; /* Inherit color from parent */
+        color: inherit;
     }
      .logo h1 {
         margin: 0;
-        font-size: 1.8rem; /* Adjust size */
+        font-size: 1.8rem;
         color: var(--accent-dark);
-        border-bottom: none; /* Remove border from layout */
+        border-bottom: none;
         padding-bottom: 0;
     }
     .logo .subtitle {
@@ -101,8 +91,8 @@ const navLinks = [
         padding: 0;
         margin: 0;
         display: flex;
-        gap: 1.5rem; /* Add space between links */
-        flex-wrap: wrap; /* Allow nav links to wrap */
+        gap: 1.5rem;
+        flex-wrap: wrap;
     }
     nav li {
         margin: 0;
@@ -111,16 +101,15 @@ const navLinks = [
         text-decoration: none;
         color: var(--text-primary);
         font-weight: 500;
-        padding: 0.5rem 0; /* Add some vertical padding */
+        padding: 0.5rem 0;
         position: relative;
         transition: color 0.2s ease;
     }
     nav a:hover,
-    nav a.active { /* Style for active link if needed */
+    nav a.active {
         color: var(--accent);
     }
 
-    /* Simple underline effect on hover */
     nav a::after {
         content: '';
         position: absolute;
@@ -139,7 +128,6 @@ const navLinks = [
         transform-origin: bottom left;
     }
 
-    /* Responsive adjustments */
     @media (max-width: 700px) {
         .container {
             flex-direction: column;
@@ -149,7 +137,7 @@ const navLinks = [
             margin-bottom: 1rem;
         }
         nav ul {
-            gap: 1rem; /* Smaller gap on mobile */
+            gap: 1rem;
         }
     }
-</style> 
+</style>
