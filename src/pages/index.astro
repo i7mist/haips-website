@@ -43,19 +43,6 @@ const speakers: Speaker[] = [
     },
 ];
 
-type ScheduleItem = { time: string; session: string };
-const schedule: ScheduleItem[] = [
-    { time: '9:00',  session: 'Opening remarks' },
-    { time: '9:10',  session: 'Invited talks I (2 talks)' },
-    { time: '10:05', session: 'Coffee + poster session' },
-    { time: '10:35', session: 'Invited talks II (3 talks)' },
-    { time: '12:00', session: 'Lunch' },
-    { time: '13:30', session: 'Spotlight presentations' },
-    { time: '14:15', session: 'Panel (all speakers)' },
-    { time: '15:00', session: 'Coffee + poster session' },
-    { time: '15:30', session: 'Unconference discussions' },
-    { time: '16:30', session: 'Report-backs + closing' },
-];
 ---
 
 <Layout title="Home">
@@ -148,20 +135,6 @@ const schedule: ScheduleItem[] = [
         </p>
 
         <p><em>The OpenReview submission link will be announced closer to the deadline. Please check back for updates.</em></p>
-    </section>
-
-    <section id="program">
-        <h2>Tentative Schedule</h2>
-        <table class="program-table">
-            <thead>
-                <tr><th>Time</th><th>Session</th></tr>
-            </thead>
-            <tbody>
-                {schedule.map(item => (
-                    <tr><td>{item.time}</td><td>{item.session}</td></tr>
-                ))}
-            </tbody>
-        </table>
     </section>
 
     <section id="organization">
@@ -272,26 +245,6 @@ const schedule: ScheduleItem[] = [
         color: var(--text-secondary);
         font-size: 0.9rem;
         line-height: 1.3;
-    }
-
-    /* Schedule */
-    #program .program-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-    }
-    #program th,
-    #program td {
-        padding: 0.5rem 0.75rem;
-        border: 1px solid var(--border-color);
-        text-align: left;
-    }
-    #program thead th {
-        background: var(--accent-light);
-        color: var(--accent-dark);
-    }
-    #program tbody tr:nth-child(even) {
-        background: var(--bg-secondary);
     }
 
     /* CFP list styling */
