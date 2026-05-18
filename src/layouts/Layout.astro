@@ -53,7 +53,9 @@ const pageTitle = `${title} | ${siteName}`;
                 color: var(--text-primary);
                 line-height: 1.6;
                 scroll-behavior: smooth;
-                scroll-padding-top: 120px;
+                /* --header-height is set at runtime by Header.astro; the fallback
+                   covers the brief moment before the script runs. */
+                scroll-padding-top: calc(var(--header-height, 130px) + 1rem);
             }
             body {
                 margin: 0;
@@ -64,7 +66,7 @@ const pageTitle = `${title} | ${siteName}`;
             main {
                 flex-grow: 1;
                 max-width: 800px;
-                margin: 130px auto 2rem auto;
+                margin: calc(var(--header-height, 130px) + 1.5rem) auto 2rem auto;
                 padding: 0 1rem;
                 width: 90%;
             }

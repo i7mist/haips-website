@@ -28,19 +28,37 @@ const navLinks = [
     </div>
 </header>
 
-<script>
-    const header = document.querySelector('header');
+<script is:inline>
+    (function () {
+        const header = document.querySelector('header');
+        if (!header) return;
 
-    const handleScroll = () => {
-        if (window.scrollY > 10) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll);
+
+        // Publish the live header height so <main>'s top margin always sits
+        // strictly below the fixed header, including when the nav wraps on mobile.
+        const updateHeaderHeight = () => {
+            document.documentElement.style.setProperty(
+                '--header-height',
+                `${header.offsetHeight}px`,
+            );
+        };
+
+        updateHeaderHeight();
+        window.addEventListener('resize', updateHeaderHeight);
+        if (typeof ResizeObserver !== 'undefined') {
+            new ResizeObserver(updateHeaderHeight).observe(header);
         }
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    })();
 </script>
 
 <style>
