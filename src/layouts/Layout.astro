@@ -80,6 +80,10 @@ const pageTitle = `${title} | ${siteName}`;
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
+                /* Allow full-bleed sections (e.g. the homepage hero) to use
+                   100vw / negative margins without producing a horizontal
+                   scrollbar from the vertical scrollbar gutter. */
+                overflow-x: clip;
             }
             main {
                 flex-grow: 1;
