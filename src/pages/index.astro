@@ -47,13 +47,17 @@ const speakers: Speaker[] = [
 
 <Layout title="Home">
 
-    <img src="/haips-banner.png" alt="HAIPS Workshop Banner" class="hero-image">
-
-    <p>
-        <strong>
-            We are excited to announce the 2nd workshop on Human-Centered Privacy and Security for Language Models (HAIPS@COLM), co-located with <a href="https://colmweb.org/" target="_blank" rel="noopener noreferrer">COLM 2026</a> in San Francisco on October 9, 2026.
-        </strong>
-    </p>
+    <div class="hero">
+        <h1 class="hero-title">HAIPS<span class="hero-accent">@COLM 2026</span></h1>
+        <p class="hero-subtitle">2nd Workshop on Human-Centered Privacy and Security for Language Models</p>
+        <p class="hero-meta">
+            <span>October 9, 2026</span>
+            <span aria-hidden="true" class="hero-sep">·</span>
+            <span>San Francisco</span>
+            <span aria-hidden="true" class="hero-sep">·</span>
+            <span>Co-located with <a href="https://colmweb.org/" target="_blank" rel="noopener noreferrer">COLM 2026</a></span>
+        </p>
+    </div>
 
     <p>
         Language models are rapidly becoming embedded in the interaction fabric of our society &mdash; as assistants, tutors, collaborators, and autonomous agents across domains from healthcare to software engineering to creative work. Their versatility makes them uniquely powerful but also uniquely hard to secure: privacy and security risks arise not just from model internals but from the rich, open-ended ways people interact with and through these systems. Humans sit at the center of these challenges &mdash; as victims of privacy violations and manipulation, as intentional or unintentional facilitators of risk, and as bystanders whose data is swept up without consent.
@@ -172,12 +176,46 @@ const speakers: Speaker[] = [
 </Layout>
 
 <style>
-    .hero-image {
-        width: 100%;
-        object-fit: cover;
-        margin-bottom: 1rem;
-        border-radius: 8px;
+    .hero {
         background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 3rem 1.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .hero-title {
+        margin: 0 0 0.5rem 0;
+        font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.15;
+        color: var(--text-primary);
+        border-bottom: none;
+        padding-bottom: 0;
+        letter-spacing: -0.01em;
+    }
+    .hero-accent {
+        color: var(--accent-dark);
+    }
+    .hero-subtitle {
+        margin: 0 0 1.25rem 0;
+        font-size: clamp(1rem, 2.4vw, 1.2rem);
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+    .hero-meta {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--text-primary);
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem 0.6rem;
+    }
+    .hero-meta a {
+        color: var(--accent-dark);
+    }
+    .hero-sep {
+        color: var(--text-secondary);
     }
     section {
         margin-bottom: 3rem;
