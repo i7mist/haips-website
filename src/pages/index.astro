@@ -47,21 +47,33 @@ const speakers: Speaker[] = [
 
 <Layout title="Home">
 
-    <div class="hero">
-        <h1 class="hero-title">HAIPS<span class="hero-accent">@COLM 2026</span></h1>
-        <p class="hero-subtitle">2nd Workshop on Human-Centered Privacy and Security for Language Models</p>
-        <p class="hero-meta">
-            <span>October 9, 2026</span>
-            <span aria-hidden="true" class="hero-sep">·</span>
-            <span>San Francisco</span>
-            <span aria-hidden="true" class="hero-sep">·</span>
-            <span>Co-located with <a href="https://colmweb.org/" target="_blank" rel="noopener noreferrer">COLM 2026</a></span>
-        </p>
-    </div>
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-motif" aria-hidden="true"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">2nd Workshop · Human-Centered Privacy and Security for Language Models</p>
+            <h1 id="hero-title" class="hero-title">HAIPS<span class="hero-accent">@COLM 2026</span></h1>
+            <p class="hero-tagline">Studying, critiquing, and building privacy and security protections for language models used by real people.</p>
+            <p class="hero-meta">
+                <span>October 9, 2026</span>
+                <span aria-hidden="true" class="hero-sep">·</span>
+                <span>San Francisco</span>
+                <span aria-hidden="true" class="hero-sep">·</span>
+                <span>Co-located with <a href="https://colmweb.org/" target="_blank" rel="noopener noreferrer">COLM 2026</a></span>
+            </p>
+            <div class="hero-cta">
+                <a href="#cfp" class="btn btn-primary">Call for Papers</a>
+                <a href="#dates" class="btn btn-secondary">Key Dates</a>
+            </div>
+        </div>
+    </section>
 
     <p>
-        Language models are rapidly becoming embedded in the interaction fabric of our society &mdash; as assistants, tutors, collaborators, and autonomous agents across domains from healthcare to software engineering to creative work. Their versatility makes them uniquely powerful but also uniquely hard to secure: privacy and security risks arise not just from model internals but from the rich, open-ended ways people interact with and through these systems. Humans sit at the center of these challenges &mdash; as victims of privacy violations and manipulation, as intentional or unintentional facilitators of risk, and as bystanders whose data is swept up without consent.
+        Language models are rapidly becoming embedded in the interaction fabric of our society &mdash; as assistants, tutors, collaborators, and autonomous agents across domains from healthcare to software engineering to creative work. Their versatility makes them uniquely powerful but also uniquely hard to secure: privacy and security risks arise not just from model internals but from the rich, open-ended ways people interact with and through these systems.
     </p>
+
+    <blockquote class="pull-quote">
+        Humans sit at the center of these challenges &mdash; as victims of privacy violations and manipulation, as intentional or unintentional facilitators of risk, and as bystanders whose data is swept up without consent.
+    </blockquote>
 
     <p>
         HAIPS@COLM aims to bring a human-centered, interdisciplinary lens to LM privacy and security, building on the <a href="/haips2025">1st HAIPS Workshop</a> held at ACM CCS 2025. We aim to foster a two-way exchange between the COLM community and researchers in HCI, usable security, and policy &mdash; grounding human-centered approaches in what LMs actually do, and informing model design with how people actually experience them.
@@ -69,12 +81,24 @@ const speakers: Speaker[] = [
 
     <section id="dates">
         <h2>Key Dates</h2>
-        <ul class="styled-list">
-            <li><strong>Submission Deadline:</strong> June 23, 2026</li>
-            <li><strong>Notification of Acceptance:</strong> July 24, 2026</li>
-            <li><strong>Camera-Ready Deadline:</strong> August 20, 2026</li>
-            <li><strong>Workshop Date:</strong> October 9, 2026</li>
-        </ul>
+        <ol class="dates-grid">
+            <li class="date-card">
+                <span class="date-label">Submission Deadline</span>
+                <time class="date-value" datetime="2026-06-23">June 23, 2026</time>
+            </li>
+            <li class="date-card">
+                <span class="date-label">Notification of Acceptance</span>
+                <time class="date-value" datetime="2026-07-24">July 24, 2026</time>
+            </li>
+            <li class="date-card">
+                <span class="date-label">Camera-Ready Deadline</span>
+                <time class="date-value" datetime="2026-08-20">August 20, 2026</time>
+            </li>
+            <li class="date-card date-card-workshop">
+                <span class="date-label">Workshop <span class="date-pill" aria-hidden="true">Event Day</span></span>
+                <time class="date-value" datetime="2026-10-09">October 9, 2026</time>
+            </li>
+        </ol>
     </section>
 
     <section id="speakers">
@@ -176,46 +200,197 @@ const speakers: Speaker[] = [
 </Layout>
 
 <style>
+    /* ───── Hero ─────────────────────────────────────────────── */
     .hero {
+        position: relative;
+        overflow: hidden;
         background-color: var(--bg-secondary);
+        background-image:
+            radial-gradient(circle at 12% 15%, rgba(52, 152, 219, 0.10), transparent 45%),
+            radial-gradient(circle at 88% 85%, rgba(217, 119, 6, 0.07), transparent 50%);
         border: 1px solid var(--border-color);
-        border-radius: 10px;
-        padding: 3rem 1.5rem;
+        border-radius: 14px;
+        padding: 3.25rem 1.5rem 2.75rem;
         text-align: center;
-        margin-bottom: 2rem;
+        margin: 0 0 2.5rem;
+        box-shadow: var(--shadow-md);
+    }
+    /* Faint dot grid suggests data nodes / participants in a network. */
+    .hero-motif {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(44, 62, 80, 0.07) 1px, transparent 1.4px);
+        background-size: 26px 26px;
+        mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+        -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+        pointer-events: none;
+    }
+    .hero-content {
+        position: relative; /* sit above motif */
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .hero-eyebrow {
+        margin: 0 0 0.9rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-dark);
     }
     .hero-title {
-        margin: 0 0 0.5rem 0;
-        font-size: clamp(2rem, 6vw, 3rem);
-        line-height: 1.15;
+        margin: 0 0 0.85rem;
+        font-size: clamp(2.1rem, 6vw, 3.1rem);
+        line-height: 1.1;
         color: var(--text-primary);
         border-bottom: none;
         padding-bottom: 0;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.015em;
     }
     .hero-accent {
         color: var(--accent-dark);
     }
-    .hero-subtitle {
-        margin: 0 0 1.25rem 0;
-        font-size: clamp(1rem, 2.4vw, 1.2rem);
-        color: var(--text-secondary);
-        line-height: 1.4;
+    .hero-tagline {
+        margin: 0 auto 1.25rem;
+        max-width: 600px;
+        font-size: clamp(1.02rem, 2.2vw, 1.18rem);
+        color: var(--text-primary);
+        line-height: 1.5;
     }
     .hero-meta {
-        margin: 0;
-        font-size: 1rem;
+        margin: 0 0 1.5rem;
+        font-size: 0.97rem;
         color: var(--text-primary);
         display: inline-flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 0.4rem 0.6rem;
+        gap: 0.4rem 0.7rem;
     }
     .hero-meta a {
         color: var(--accent-dark);
+        text-decoration: underline;
+        text-decoration-color: rgba(41, 128, 185, 0.35);
+        text-underline-offset: 3px;
     }
     .hero-sep {
         color: var(--text-secondary);
+    }
+    .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-top: 0.25rem;
+    }
+
+    /* ───── Buttons ──────────────────────────────────────────── */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.7rem 1.4rem;
+        font-size: 0.97rem;
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--radius-sm);
+        border: 1.5px solid transparent;
+        text-decoration: none;
+        transition: background-color 0.15s ease, color 0.15s ease,
+                    border-color 0.15s ease, transform 0.1s ease,
+                    box-shadow 0.15s ease;
+    }
+    .btn:hover {
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+    .btn:active {
+        transform: translateY(0);
+    }
+    .btn-primary {
+        background: var(--accent-dark);
+        color: #fff;
+        border-color: var(--accent-dark);
+        box-shadow: 0 1px 2px rgba(41, 128, 185, 0.25);
+    }
+    .btn-primary:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
+    }
+    .btn-secondary {
+        background: transparent;
+        color: var(--accent-dark);
+        border-color: var(--accent-dark);
+    }
+    .btn-secondary:hover {
+        background: var(--accent-tint);
+        color: var(--accent-dark);
+    }
+
+    /* ───── Pull-quote ───────────────────────────────────────── */
+    .pull-quote {
+        margin: 2.25rem 0;
+        padding: 0.4rem 0 0.4rem 1.25rem;
+        border-left: 4px solid var(--accent-warm);
+        font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.45;
+        color: var(--text-primary);
+        background: transparent;
+    }
+
+    /* ───── Key Dates ────────────────────────────────────────── */
+    .dates-grid {
+        list-style: none;
+        padding-left: 0;
+        margin: 1.5rem 0 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+    .date-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-top: 3px solid var(--accent);
+        border-radius: var(--radius-sm);
+        padding: 1rem 1.1rem 1.1rem;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    .date-card-workshop {
+        border-top-color: var(--accent-warm);
+        background: linear-gradient(180deg, var(--accent-warm-soft) 0%, var(--bg-card) 60%);
+    }
+    .date-label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .date-value {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        font-variant-numeric: tabular-nums;
+    }
+    .date-pill {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        background: var(--accent-warm);
+        color: #fff;
+        padding: 0.15rem 0.5rem;
+        border-radius: 999px;
+        text-transform: uppercase;
     }
     section {
         margin-bottom: 3rem;
@@ -223,31 +398,18 @@ const speakers: Speaker[] = [
     }
     section h2 {
         margin-top: 0;
-        border-bottom: 2px solid var(--accent-light);
-        padding-bottom: 0.4rem;
+        margin-bottom: 1.1rem;
+        padding-bottom: 0.45rem;
         display: inline-block;
+        border-bottom: 3px solid transparent;
+        border-image: linear-gradient(to right, var(--accent) 0%, var(--accent) 65%, var(--accent-warm) 100%) 1;
+        color: var(--text-primary);
     }
     section h3 {
-        margin-top: 2.5rem;
+        margin-top: 2.25rem;
+        margin-bottom: 0.7rem;
+        color: var(--text-primary);
     }
-    .styled-list {
-        list-style: none;
-        padding-left: 0;
-    }
-    .styled-list li {
-        margin-bottom: 0.5rem;
-        padding-left: 1.2em;
-        position: relative;
-    }
-    .styled-list li::before {
-        content: '\25AA';
-        color: var(--accent);
-        position: absolute;
-        left: 0;
-        top: 1px;
-        font-size: 0.8em;
-    }
-
     /* Shared people grid (speakers + organizers) */
     .people-grid {
         list-style: none;
