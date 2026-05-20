@@ -47,7 +47,7 @@ const speakers: Speaker[] = [
 
 <Layout title="Home">
 
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero" aria-labelledby="hero-title" slot="hero">
         <div class="hero-motif" aria-hidden="true"></div>
         <div class="hero-content">
             <p class="hero-eyebrow">2nd Workshop · HAIPS@COLM 2026</p>
@@ -212,12 +212,10 @@ const speakers: Speaker[] = [
         border: none;
         padding: 3.25rem 1.5rem 2.75rem;
         text-align: center;
-        /* Break out of the 800px <main> container so the motif and background
-           span the full viewport width with no surrounding frame. */
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
-        margin-top: 0;
+        /* Rendered as a direct child of <body> via Layout's `hero` slot, so
+           it spans the body width naturally — no 100vw breakout needed.
+           Top margin clears the fixed header. */
+        margin-top: calc(var(--header-height, 130px));
         margin-bottom: 2.5rem;
     }
     /* Faint dot grid suggests data nodes / participants in a network. */

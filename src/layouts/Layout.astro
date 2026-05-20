@@ -30,6 +30,7 @@ const pageTitle = `${title} | ${siteName}`;
     </head>
     <body>
         <Header />
+        <slot name="hero" />
         <main>
             <slot />
         </main>
@@ -91,6 +92,11 @@ const pageTitle = `${title} | ${siteName}`;
                 margin: calc(var(--header-height, 130px) + 1.5rem) auto 2rem auto;
                 padding: 0 1rem;
                 width: 90%;
+            }
+            /* When a full-bleed hero precedes <main>, the hero clears the
+               fixed header, so <main> doesn't also need to offset for it. */
+            body:has(.hero) main {
+                margin-top: 0;
             }
             h1, h2, h3, h4 {
                 color: var(--accent-dark);
