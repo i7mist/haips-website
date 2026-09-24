@@ -49,6 +49,8 @@ type ScheduleItem = {
     kind: 'talk' | 'panel' | 'spotlight' | 'break' | 'misc';
     session: string;
     who?: string;
+    talk?: string;
+    abstract?: string;
     paper?: string;
     authors?: string;
     note?: string;
@@ -60,10 +62,18 @@ const schedule: ScheduleItem[] = [
     { start: '9:40', end: '10:10', kind: 'talk', session: 'Invited talk', who: 'Helen Nissenbaum (Cornell Tech)' },
     { start: '10:10', end: '10:35', kind: 'break', session: 'Coffee break + posters' },
     { start: '10:35', end: '11:05', kind: 'talk', session: 'Invited talk', who: 'Ruoxi Jia (Virginia Tech)' },
-    { start: '11:05', end: '11:35', kind: 'talk', session: 'Invited talk', who: 'Maarten Sap (Carnegie Mellon University)' },
+    {
+        start: '11:05',
+        end: '11:35',
+        kind: 'talk',
+        session: 'Invited talk',
+        who: 'Maarten Sap (Carnegie Mellon University)',
+        talk: 'Social Intelligence in LLMs: Implications for AI Privacy and Safety',
+        abstract: 'LLMs are increasingly deployed in settings where they must display social intelligence, yet it\u2019s unclear that they even have social intelligence, or that socially intelligent AI is safe for users. In this talk, I will discuss ongoing research related to how user-centric privacy and safety are affected by social intelligence in AI. I will first introduce Sotopia-ToM, a new multi-agent benchmark to measure how well LLM agents navigate information asymmetry, finding severe privacy violations in many LLMs. Then, I will turn to risks of hidden manipulation by LLMs, demonstrating that while LLMs can manipulate users and cause real belief shift, they struggle to detect such manipulation, posing significant risks. I\u2019ll conclude with some future directions towards more socially intelligent and safer LLMs.',
+    },
     { start: '11:35', end: '12:05', kind: 'talk', session: 'Invited talk', who: 'Nina Taft (Google)' },
     { start: '12:05', end: '13:25', kind: 'break', session: 'Lunch' },
-    { start: '13:25', end: '14:10', kind: 'panel', session: 'Panel discussion', who: 'Panelists: Helen Nissenbaum, Ruoxi Jia, Maarten Sap, Nina Taft; Moderator: TBD' },
+    { start: '13:25', end: '14:10', kind: 'panel', session: 'Panel discussion', who: 'Panelists: Helen Nissenbaum, Ruoxi Jia, Maarten Sap, Nina Taft; Moderator: Niloofar Mireshghallah' },
     { start: '14:10', end: '14:15', kind: 'break', session: 'Break' },
     { start: '14:15', end: '14:25', kind: 'spotlight', session: 'Spotlight talk', paper: 'PrivacySIM: Evaluating LLM Simulation of User Privacy Behavior', authors: 'James Flemings, Murali Annavaram' },
     { start: '14:25', end: '14:35', kind: 'spotlight', session: 'Spotlight talk', paper: 'Natively Unlearnable Large Language Models', authors: 'Gaurav Rohit Ghosal, Pratyush Maini, Aditi Raghunathan' },
@@ -175,8 +185,15 @@ const schedule: ScheduleItem[] = [
                     <tr class={`row-${item.kind}`}>
                         <td class="schedule-time">{item.start}&ndash;{item.end}</td>
                         <td class="schedule-session">{item.session}</td>
-                        <td class={`schedule-details${item.who || item.paper || item.authors || item.note ? '' : ' schedule-details-empty'}`}>
+                        <td class={`schedule-details${item.who || item.talk || item.paper || item.authors || item.note ? '' : ' schedule-details-empty'}`}>
                             {item.who && <span class="schedule-who">{item.who}</span>}
+                            {item.talk && <span class="schedule-paper">{item.talk}</span>}
+                            {item.abstract && (
+                                <details class="schedule-abstract">
+                                    <summary>Abstract</summary>
+                                    <p>{item.abstract}</p>
+                                </details>
+                            )}
                             {item.paper && <span class="schedule-paper">{item.paper}</span>}
                             {item.authors && <span class="schedule-authors">{item.authors}</span>}
                             {item.note && <span class="schedule-note">{item.note}</span>}
@@ -561,6 +578,20 @@ const schedule: ScheduleItem[] = [
     .schedule-note {
         color: var(--text-secondary);
         font-size: 0.9rem;
+    }
+    .schedule-abstract {
+        margin-top: 0.3rem;
+        font-size: 0.9rem;
+    }
+    .schedule-abstract summary {
+        cursor: pointer;
+        color: var(--accent-dark);
+        font-weight: 600;
+    }
+    .schedule-abstract p {
+        margin: 0.4rem 0 0;
+        color: var(--text-secondary);
+        line-height: 1.5;
     }
     .schedule-table tr.row-break td {
         background: var(--bg-secondary);
