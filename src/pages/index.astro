@@ -58,10 +58,27 @@ type ScheduleItem = {
 
 const schedule: ScheduleItem[] = [
     { start: '9:00', end: '9:10', kind: 'misc', session: 'Opening remarks' },
-    { start: '9:10', end: '9:40', kind: 'talk', session: 'Invited talk', who: 'Florian Tramèr (ETH Zurich)', note: 'Remote talk' },
+    {
+        start: '9:10',
+        end: '9:40',
+        kind: 'talk',
+        session: 'Invited talk',
+        who: 'Florian Tramèr (ETH Zurich)',
+        talk: 'LLMs as OSINT operatives',
+        abstract: 'Collecting, analyzing and using public data to answer intelligence questions. That sounds like exactly the type of thing LLMs are good at, no? This is also the definition of OSINT ("open source intelligence"), and I argue that LLMs are going to democratize these practices by giving everyone access to a cheap, automated and massively scalable AI-investigator.\n\nI\u2019ll demonstrate some of our early experiments with LLMs as OSINT operatives, covering deanonymization and profiling of individuals from public Web data. The OSINT capabilities of LLMs suggest that we need to fundamentally rethink the privacy and security risks stemming from large-scale processing of public data.',
+        note: 'Remote talk',
+    },
     { start: '9:40', end: '10:10', kind: 'talk', session: 'Invited talk', who: 'Helen Nissenbaum (Cornell Tech)' },
     { start: '10:10', end: '10:35', kind: 'break', session: 'Coffee break + posters' },
-    { start: '10:35', end: '11:05', kind: 'talk', session: 'Invited talk', who: 'Ruoxi Jia (Virginia Tech)' },
+    {
+        start: '10:35',
+        end: '11:05',
+        kind: 'talk',
+        session: 'Invited talk',
+        who: 'Ruoxi Jia (Virginia Tech)',
+        talk: 'A North Star for a Human-Centered Data Economy',
+        abstract: 'AI systems draw their capabilities from human knowledge, creativity, and effort, yet the people who generate training data often have little visibility into its use or participation in the value it creates. What should guide the design of a data economy that works for both AI developers and data contributors? In this talk, I argue that a sustainable AI economy requires infrastructure that makes human contributions discoverable, traceable, and meaningfully rewarded. Drawing on our analysis of 73 publicly disclosed data deals, I examine three structural obstacles: missing provenance, unequal bargaining power, and pricing that fails to reflect data\u2019s evolving, task-dependent value. I then introduce a framework for equitable data exchange and discuss recent work on two of its technical foundations: task\u2013data matching and data valuation. These advances offer building blocks for connecting useful data with downstream needs and informing how contributors are compensated.',
+    },
     {
         start: '11:05',
         end: '11:35',
@@ -191,7 +208,7 @@ const schedule: ScheduleItem[] = [
                             {item.abstract && (
                                 <details class="schedule-abstract">
                                     <summary>Abstract</summary>
-                                    <p>{item.abstract}</p>
+                                    {item.abstract.split('\n\n').map(para => <p>{para}</p>)}
                                 </details>
                             )}
                             {item.paper && <span class="schedule-paper">{item.paper}</span>}
